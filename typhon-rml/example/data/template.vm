@@ -1,0 +1,67 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))
+#set($reader_zbbajfbijgg = $readers.zbaahjecdfd)
+
+#set($dataframe_zbbajfbijgg = $reader_zbbajfbijgg.getDataframe('{
+			    "iterator": "$[*]",
+			    "paths": {
+			    "bagjbb": "lat",
+			    "bahddj": "lon",
+			    "zbgjahccccb": "message_id",
+			    "ffbcgcje": "timestamp",
+			    "zijgfaficj": "source",
+			    "bajgebhjj": "speed" }}'))
+
+#foreach($i in $dataframe_zbbajfbijgg)
+  <$functions.resolveIRI("http://example.org/observation/${i.zbgjahccccb}/${i.ffbcgcje}")> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/sosa/Observation> .
+
+  #set($refs = [${i.ffbcgcje}, ${i.zbgjahccccb}])
+
+  #if($functions.checkStrings($refs))
+    <$functions.resolveIRI("http://example.org/observation/${i.zbgjahccccb}/${i.ffbcgcje}")> <http://www.w3.org/ns/sosa/resultTime> $functions.resolveDatatype("${i.ffbcgcje}","http://www.w3.org/2001/XMLSchema${esc.h}dateTime") .
+  #end
+
+  #set($refs = [${i.ffbcgcje}, ${i.zbgjahccccb}, ${i.zijgfaficj}])
+  #if($functions.checkStrings($refs))
+    <$functions.resolveIRI("http://example.org/observation/${i.zbgjahccccb}/${i.ffbcgcje}")> <http://www.w3.org/ns/sosa/madeBySensor> <$functions.resolveIRI("http://example.org/sensor/${i.zijgfaficj}")> .
+  #end
+
+  #set($refs = [${i.ffbcgcje}, ${i.zbgjahccccb}, ${i.bahddj}, ${i.bagjbb}])
+
+  #if($functions.checkStrings($refs))
+    <$functions.resolveIRI("http://example.org/observation/${i.zbgjahccccb}/${i.ffbcgcje}")> <http://www.w3.org/ns/sosa/hasFeatureOfInterest> <$functions.resolveIRI("http://example.org/location/${i.bagjbb}/${i.bahddj}")> .
+  #end
+
+  #set($refs = [${i.ffbcgcje}, ${i.bajgebhjj}, ${i.zbgjahccccb}])
+
+  #if($functions.checkStrings($refs))
+    <$functions.resolveIRI("http://example.org/observation/${i.zbgjahccccb}/${i.ffbcgcje}")> <http://www.w3.org/ns/sosa/hasSimpleResult> $functions.resolveDatatype("${i.bajgebhjj}","http://www.w3.org/2001/XMLSchema${esc.h}double") .
+  #end
+
+  #set($refs = [${i.ffbcgcje}, ${i.zbgjahccccb}])
+
+  #if($functions.checkStrings($refs))
+    <$functions.resolveIRI("http://example.org/observation/${i.zbgjahccccb}/${i.ffbcgcje}")> <http://www.w3.org/ns/sosa/observedProperty> <$functions.resolveIRI("http://example.org/ns${esc.h}Speed")> .
+  #end
+  #end        
+
+  #foreach($i in $dataframe_zbbajfbijgg)
+
+  <$functions.resolveIRI("http://example.org/location/${i.bagjbb}/${i.bahddj}")> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/sosa/FeatureOfInterest> .
+
+  #set($refs = [${i.bahddj}, ${i.bagjbb}])
+
+
+  #if($functions.checkStrings($refs))
+
+  <$functions.resolveIRI("http://example.org/location/${i.bagjbb}/${i.bahddj}")> <$functions.resolveIRI("http://www.w3.org/2003/01/geo/wgs84_pos${esc.h}long")> $functions.resolveDatatype("${i.bahddj}","http://www.w3.org/2001/XMLSchema${esc.h}double") .
+  #end
+
+  #set($refs = [${i.bahddj}, ${i.bagjbb}])
+
+
+  #if($functions.checkStrings($refs))
+
+  <$functions.resolveIRI("http://example.org/location/${i.bagjbb}/${i.bahddj}")> <$functions.resolveIRI("http://www.w3.org/2003/01/geo/wgs84_pos${esc.h}lat")> $functions.resolveDatatype("${i.bagjbb}","http://www.w3.org/2001/XMLSchema${esc.h}double") .
+  #end
+
+#end

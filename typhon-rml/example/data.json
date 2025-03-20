@@ -1,0 +1,18 @@
+[
+  {
+    "source": "50PX",
+    "message_id": 101,
+    "lat": 51.8815,
+    "lon": -8.495,
+    "speed": 4.2771034,
+    "timestamp": 1713430637
+  },
+  {
+    "source": "50PX",
+    "message_id": 102,
+    "lat": 51.8813,
+    "lon": -8.4946,
+    "speed": 6.2771034,
+    "timestamp": 1713430639
+  }
+]

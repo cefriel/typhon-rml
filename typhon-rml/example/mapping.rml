@@ -1,0 +1,82 @@
+@prefix rml: <http://w3id.org/rml/> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ex: <http://example.org/ns#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+
+<http://example.com/base/LogicalSource> a rml:LogicalSource;
+    rml:iterator "$[*]";
+    rml:referenceFormulation rml:JSONPath;
+    rml:source [ a rml:RelativePathSource;
+        rml:root rml:MappingDirectory;
+        rml:path "data.json"
+    ] .
+
+<http://example.com/base/TriplesMap1> a rml:TriplesMap;
+    rml:logicalSource <http://example.com/base/LogicalSource>;
+    
+    rml:subjectMap [
+        rml:template "http://example.org/observation/{message_id}/{timestamp}" ;
+        rml:class sosa:Observation
+    ] ;
+    
+    rml:predicateObjectMap [
+        rml:predicate sosa:hasFeatureOfInterest ;
+        rml:objectMap [
+            rml:template "http://example.org/location/{lat}/{lon}" ;
+            rml:class sosa:FeatureOfInterest
+        ]
+    ] ;
+    
+    rml:predicateObjectMap [
+        rml:predicate sosa:resultTime ;
+        rml:objectMap [
+            rml:reference "timestamp" ;
+            rml:datatype xsd:dateTime
+        ]
+    ] ;
+    
+    rml:predicateObjectMap [
+        rml:predicate sosa:observedProperty ;
+        rml:objectMap [ rml:constant ex:Speed ]
+    ] ;
+    
+    rml:predicateObjectMap [
+        rml:predicate sosa:hasSimpleResult ;
+        rml:objectMap [
+            rml:reference "speed" ;
+            rml:datatype xsd:double
+        ]
+    ] ;
+    
+    rml:predicateObjectMap [
+        rml:predicate sosa:madeBySensor ;
+        rml:objectMap [
+            rml:template "http://example.org/sensor/{source}" ;
+            rml:class sosa:Sensor
+        ]
+    ] .
+
+<http://example.com/base/TriplesMap2> a rml:TriplesMap;
+    rml:logicalSource <http://example.com/base/LogicalSource>;
+    
+    rml:subjectMap [
+        rml:template "http://example.org/location/{lat}/{lon}" ;
+        rml:class sosa:FeatureOfInterest
+    ] ;
+    
+    rml:predicateObjectMap [
+        rml:predicate geo:lat ;
+        rml:objectMap [
+            rml:reference "lat" ;
+            rml:datatype xsd:double
+        ]
+    ] ;
+    
+    rml:predicateObjectMap [
+        rml:predicate geo:long ;
+        rml:objectMap [
+            rml:reference "lon" ;
+            rml:datatype xsd:double
+        ]
+    ] .
