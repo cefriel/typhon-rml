@@ -3,7 +3,9 @@ package com.cefriel;
 import com.cefriel.template.io.Reader;
 import com.cefriel.template.io.csv.CSVReader;
 import com.cefriel.template.io.json.JSONReader;
+import com.cefriel.template.io.sql.SQLReader;
 import com.cefriel.template.io.xml.XMLReader;
+import com.cefriel.template.utils.Util;
 import org.apache.camel.AggregationStrategy;
 import org.apache.camel.Exchange;
 
@@ -33,11 +35,18 @@ public class ReadersAggregation implements AggregationStrategy {
 
     public Map<String, Reader> getReaders(Exchange exchange) {
         String readerContent = exchange.getMessage().getBody(String.class);
+        // the exchange variable names are defined in the router.vm file from typhon-rml
         String readerFormat = exchange.getVariable("readerFormat", String.class);
         String readerName = exchange.getVariable("readerName", String.class);
 
         Reader reader = switch (readerFormat) {
             case "json" -> new JSONReader(readerContent);
+            case "sql" -> {
+                String jdbcDSN = exchange.getVariable("jdbcDSN", String.class);
+                String username = exchange.getVariable("username", String.class);
+                String password = exchange.getVariable("password", String.class);
+                yield new SQLReader(jdbcDSN, username, password);
+            }
             case "xml" -> {
                 try {
                     yield new XMLReader(readerContent);
