@@ -168,7 +168,7 @@ ORDER BY ?reader_id
 #set($lLogicalSources = $functions.getMap($mappings_content, "_source"))#foreach($ls in $lLogicalSources.keySet())#if(!$lLogicalSources.get($ls).get("_REFS_"))#set($refs = [])#set($foo = $lLogicalSources.get($ls).put("_REFS_", $refs))#end#end##
 #foreach($tm in $lTriplesMaps.keySet())#set($refs = $lTriplesMaps.get($tm).get("_REFS_"))#set($tm_source = $lTriplesMaps.get($tm)._source)#set($foo = $lLogicalSources.get($tm_source).get("_REFS_").addAll($refs))#end##
 #foreach($ls in $lLogicalSources.keySet())#set($refs = $lLogicalSources.get($ls).get("_REFS_"))#set($foo = $lLogicalSources.get($ls).put("_REFS_", $functions.getDistinct($refs)))#end##
-#set($sqlTypes = [])#foreach($lsEntry in $lLogicalSources.entrySet())#set($ls = $lsEntry.value)#end##
+#set($sqlTypes = [])#foreach($lsEntry in $lLogicalSources.entrySet())#set($ls = $lsEntry.value)##
 #set($refForm = $ls.ref_form)#set($sourceHash = $functions.hash($ls._source))#set($foo = $ls.put("_SOURCE_HASH_", $sourceHash))#set($lsReferences = $ls.get("_REFS_"))#set($iterator = $ls.iterator)${h}set(${d}reader_$sourceHash = ${d}readers.$functions.hash($ls.reader_id))##
 #if($refForm == "http://w3id.org/rml/CSV")##
 ${h}set(${d}foo = ${d}reader_${sourceHash}.setHashVariable(true))##
@@ -206,7 +206,7 @@ ${h}set(${d}dataframe_$sourceHash = ${d}reader_${sourceHash}.getDataframe('$xmlQ
 ')#set($referenceQuery = $referenceQuery.replace("VARIABLE", $refHash))#set($ref = $ref.replace("$.",""))#set($referenceQuery = $referenceQuery.replace("REFERENCE", $ref))#set($jsonQuery = "${jsonQuery}${referenceQuery}")#end#set($jsonQuery = $jsonQuery.trim())#set($jsonQuery = $jsonQuery.substring(0, $jsonQuery.length() - 1))#set($jsonQuery = "${jsonQuery} }}")#set($jsonQuery = $functions.sanitizeJSON($jsonQuery))## 
 ${h}set(${d}dataframe_$sourceHash = ${d}reader_${sourceHash}.getDataframe('$jsonQuery'))#else##
 ${h}set(${d}dataframe_$sourceHash = [{"ITERATOR" : "ONCE"}])#end#else##
-${d}error: "No compatible Reader found."#end## 
+${d}error: "No compatible Reader found."#end#end## 
 #foreach($row in $mappings_content)#if($row.object_parent_triples_map)#set($childHash = $functions.hash($row._source))#set($tmParent = $lTriplesMaps.get($row.object_parent_triples_map))#set($join_hash = $functions.appendHash($tmParent._source, $row.parent_value))#set($child_df = "$dataframe_" + $childHash)#set($parentHash = $functions.hash($tmParent._source))#set($parent_df = "$dataframe_" + $parentHash)#if($row.join_condition)#set($join_variable = $functions.hash($row.parent_value))${h}if(!${d}dataframe_join_$join_hash)${h}set(${d}dataframe_join_$join_hash = ${d}functions.getListMap($parent_df, "$join_variable"))${h}end#else${h}if(!${d}dataframe_join_$join_hash)${h}set(${d}dataframe_join_$join_hash = $parent_df)${h}end#end#end#end## 
 #macro(subjectRender $stm)#set($s = $null)#if($stm.subject_template)#set($s = $functions.resolveTemplate($stm.subject_template))#elseif($stm.subject_reference)#set($s = $functions.resolveReference($stm.subject_reference))#elseif($stm.subject_constant)#set($s = $stm.subject_constant)#elseif($stm.subject_constant_shortcut)#set($s = $stm.subject_constant_shortcut)#end #if($stm.subject_termtype == "http://w3id.org/rml/BlankNode")#set($s = $functions.encodeBlankNode($s))#elseif($stm.subject_termtype == "http://w3id.org/rml/Literal")${d}error: subject can not be of type Literal.#else#set($s = $functions.encodeReferencesIRI($s, $stm.subject_termtype))#end##
 $s#end## 
