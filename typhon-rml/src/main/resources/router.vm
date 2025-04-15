@@ -70,7 +70,8 @@ WHERE {
 		     "http://w3id.org/rml/SQL2008Query": "sql"})
 
   #set ($compressionMap = {"http://w3id.org/rml/gzip": "gzipDeflater",
-       			   "http://w3id.org/rml/zip": "zipFile"})
+       			   "http://w3id.org/rml/zip": "zipFile",
+			   "http://w3id.org/rml/targz": "gzipDeflater"})
 
   #set ($var = $functions.getMap($sources, "reader_id"))
 
@@ -99,6 +100,11 @@ WHERE {
       <unmarshal>
         <$compressionMap[$source.compression]/>
       </unmarshal>
+      #if ($source.compression == "http://w3id.org/rml/targz")
+        <unmarshal>
+          <tarFile/>
+        </unmarshal>
+      #end
       #if ($source.compression == "http://w3id.org/rml/zip")
         <split stopOnException="true">
           <simple>${d}{body}</simple>
