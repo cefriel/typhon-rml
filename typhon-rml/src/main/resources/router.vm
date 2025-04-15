@@ -4,6 +4,8 @@ prefix dcat: <http://www.w3.org/ns/dcat#>
 prefix d2rq: <http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#>
 "))
 
+#set($d="$")
+
 #set ($sources = $reader.getDataframe("
 SELECT DISTINCT *
 WHERE {
@@ -21,12 +23,14 @@ WHERE {
     ?data_source a rml:FilePath .
     ?data_source rml:root ?root_folder .
     ?data_source rml:path ?path .
+    ?data_source rml:compression ?compression .
   }
   # TODO Handle relative paths
   OPTIONAL {
     ?data_source a rml:RelativePathSource .
     ?data_source rml:root ?root_folder .
     ?data_source rml:path ?path .
+    ?data_source rml:compression ?compression .
   }
   OPTIONAL {
     ?_source rml:referenceFormulation ?ref_form .
@@ -46,7 +50,6 @@ WHERE {
 		 d2rq:password ?password .
   }
 }
-ORDER BY ?reader_id
 "))
 
 #set ($templateLocation = "./data")
@@ -66,86 +69,90 @@ ORDER BY ?reader_id
 		     "http://w3id.org/rml/SQL2008Table": "sql",
 		     "http://w3id.org/rml/SQL2008Query": "sql"})
 
-  ## todo dedup sources
-  ## get list map value for reader_id, only get first value
+  #set ($compressionMap = {"http://w3id.org/rml/gzip": "gzipDeflater",
+       			   "http://w3id.org/rml/zip": "zipFile"})
 
   #set ($var = $functions.getMap($sources, "reader_id"))
-  #set ($sourceSignatures = [])
 
   #foreach ($k in $var.keySet())
   #set ($source = $functions.getMapValue($var, $k))
 
-  ## for each source compute unique signature (not same as reader_id) given by:
-  ## hash of rml:root + rml:path
+  #set ($routeId = $functions.literalHash($source.reader_id))
+  #set ($readerName = $routeId)
+  #set ($inputFormat = $inputMap[$source.ref_form])
+  <route id="$routeId">
 
-  #set ($sourceSignature = $functions.literalHash($source.root_folder + $source.path))
-
-  #if(!$sourceSignatures.contains($sourceSignature))
-    #set($void = $sourceSignatures.add($sourceSignature))
-    #set ($routeId = $functions.literalHash($source.reader_id))
-    #set ($readerName = $routeId)
-    #set ($inputFormat = $inputMap[$source.ref_form])
-    <route id="$routeId">
-
-    #if ($source.root_folder)
-      #if ($source.root_folder == "http://w3id.org/rml/MappingDirectory")
-	  #set ($dir = "./")
-      #end
-    #end
-
-      ## logic for reading from files
-      #if ($source.path)
-	## HACK for KGCW2025
-	## #set ($dir = "/app/data")
-	<from uri="file:${dir}?fileName=${source.path}&amp;noop=true"/>
-	<convertBodyTo type="java.lang.String"/>
-      #end
-
-      ## handle sql database
-      #if ($inputFormat == "sql")
-      <from uri="timer:trigger_${routeId}?repeatCount=1"/>
-	<setVariable name="jdbcDSN">
-	  <constant>$source.jdbcDSN</constant>
-	</setVariable>
-	<setVariable name="username">
-	  <constant>$source.user</constant>
-	</setVariable>
-	<setVariable name="password">
-	  <constant>$source.password</constant>
-	</setVariable>
-      #end
-
-      <setVariable name="readerFormat">
-	<constant>$inputMap[$source.ref_form]</constant>
-      </setVariable>
-
-      <setVariable name="readerName">
-	<constant>$readerName</constant>
-      </setVariable>
-
-      <to uri="direct:aggregate"/>
-      </route>    
+  #if ($source.root_folder)
+    #if ($source.root_folder == "http://w3id.org/rml/MappingDirectory")
+	#set ($dir = "./")
     #end
   #end
+
+  ## logic for reading from files
+  #if ($source.path)
+    ## HACK for KGCW2025
+    ## #set ($dir = "/app/data")
+    <from uri="file:${dir}?fileName=${source.path}&amp;noop=true"/>
+
+    ## handle input compression
+    #if ($source.compression)
+      <unmarshal>
+        <$compressionMap[$source.compression]/>
+      </unmarshal>
+      #if ($source.compression == "http://w3id.org/rml/zip")
+        <split stopOnException="true">
+          <simple>${d}{body}</simple>
+        <convertBodyTo type="java.lang.String"/>
+    </split>
+      #end
+    #end 
+
+    <convertBodyTo type="java.lang.String"/>
+  #end
+
+    ## handle sql database
+    #if ($inputFormat == "sql")
+    <from uri="timer:trigger_${routeId}?repeatCount=1"/>
+      <setVariable name="jdbcDSN">
+	<constant>$source.jdbcDSN</constant>
+      </setVariable>
+      <setVariable name="username">
+	<constant>$source.user</constant>
+      </setVariable>
+      <setVariable name="password">
+	<constant>$source.password</constant>
+      </setVariable>
+    #end
+
+    <setVariable name="readerFormat">
+      <constant>$inputMap[$source.ref_form]</constant>
+    </setVariable>
+
+    <setVariable name="readerName">
+      <constant>$readerName</constant>
+    </setVariable>
+
+    <to uri="direct:aggregate"/>
+    </route>    
+  #end  
 
   <route id="readersAggregation">
   <from uri="direct:aggregate" />
   <!-- HARDCODED NAME OF AGGREGATIONS STRATEGY, DO NOT CHANGE -->
   <aggregate
   aggregationStrategy="#class:com.cefriel.ReadersAggregation"
-  completionSize="$sourceSignatures.size()">
+  completionSize="$var.size()">
     <correlationExpression>
     <constant>true</constant>
     </correlationExpression>
 
     <to uri="mapt://readers?template=#bean:template"/>
-    <to uri="graph://get?rdfFormat=nquads&amp;defaultGraph=true"/>
-    <to uri="graph://dump?dumpFormat=nquads"/>
+ ##   <to uri="graph://get?rdfFormat=nquads&amp;defaultGraph=true"/>
+ ##   <to uri="graph://dump?dumpFormat=nquads"/>
     <to uri="file:./?fileName=output.nq"/>
 
     <!-- STOP THE ROUTE AFTER ONE EXECUTION -->
     <process ref="#class:com.cefriel.ShutDownProcessor"/>
     </aggregate>
  </route>
-
 </beans>

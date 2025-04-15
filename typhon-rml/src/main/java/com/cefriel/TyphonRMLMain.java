@@ -6,11 +6,18 @@ import com.cefriel.template.io.Reader;
 import com.cefriel.template.io.rdf.RDFReader;
 import com.cefriel.template.io.xml.XMLFormatter;
 import com.cefriel.template.utils.RMLCompilerUtils;
+import com.cefriel.template.utils.TemplateFunctions;
 import org.eclipse.rdf4j.model.Model;
+import org.eclipse.rdf4j.model.ValueFactory;
+import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
+import org.eclipse.rdf4j.query.BindingSet;
 import org.eclipse.rdf4j.query.QueryResults;
+import org.eclipse.rdf4j.query.TupleQuery;
+import org.eclipse.rdf4j.query.TupleQueryResult;
 import org.eclipse.rdf4j.repository.Repository;
 import org.eclipse.rdf4j.repository.RepositoryConnection;
 import org.eclipse.rdf4j.repository.sail.SailRepository;
+import org.eclipse.rdf4j.repository.util.Connections;
 import org.eclipse.rdf4j.repository.util.Repositories;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.Rio;
@@ -28,14 +35,33 @@ import java.util.Map;
 
 public class TyphonRMLMain {
 
-    private static final String constructQuery = "prefix rml: <http://w3id.org/rml/>\n" +
-            "CONSTRUCT {\n" +
-            "  ?ls rml:reader ?readerId .\n" +
-            "}\n" +
-            "WHERE {      \n" +
-            "?ls rml:source ?source .\n" +
-            "BIND(STR(UUID()) as ?readerId)\n" +
-            "}";
+    public static void addReaderIds(RepositoryConnection connection) {
+        String propertiesForSource = "PREFIX rml: <http://w3id.org/rml/>\n" +
+                "\n" +
+                "SELECT ?logicalSource (GROUP_CONCAT(CONCAT(\"rml:referenceFormulation=\", STR(?ref), \", \", STR(?predicate), \"=\", STR(?object)); separator=\", \") AS ?details)\n" +
+                "WHERE {\n" +
+                "  ?triplesMap a rml:TriplesMap ;\n" +
+                "              rml:logicalSource ?logicalSource .\n" +
+                "  \n" +
+                "  ?logicalSource rml:source ?source ;\n" +
+                "                 rml:referenceFormulation ?ref .\n" +
+                "  \n" +
+                "  ?source ?predicate ?object .\n" +
+                "}\n" +
+                "GROUP BY ?logicalSource\n";
+
+        ValueFactory vf = SimpleValueFactory.getInstance();
+        TupleQuery query = connection.prepareTupleQuery(propertiesForSource);
+        try (TupleQueryResult result = query.evaluate()) {
+            while (result.hasNext()) {
+                BindingSet bindingSet = result.next();
+                String logicalSource = bindingSet.getValue("logicalSource").stringValue();
+                String details = bindingSet.getValue("details").stringValue();
+
+                connection.add(vf.createBNode(logicalSource), vf.createIRI("http://w3id.org/rml/reader"), vf.createLiteral(TemplateFunctions.literalHash(details)));
+            }
+        }
+    }
 
     public static void main(String[] args) throws Exception {
 
@@ -53,9 +79,6 @@ public class TyphonRMLMain {
         }
 
         System.out.println("RML Mapping file provided: " + filePath);
-
-        // TODO run construct query
-
         Repository repository = new SailRepository(new MemoryStore());
         repository.init();
 
@@ -64,9 +87,7 @@ public class TyphonRMLMain {
 
             FileInputStream inputStream = new FileInputStream(filePath);
             connection.add(inputStream, "", RDFFormat.TURTLE);
-
-            Model constructResult = Repositories.graphQuery(repository, constructQuery, QueryResults::asModel);
-            connection.add(constructResult);
+            addReaderIds(connection);
 
             // Dump the entire in-memory graph as a Turtle-formatted string
             StringWriter writer = new StringWriter();
@@ -75,9 +96,6 @@ public class TyphonRMLMain {
             Rio.write(entireGraph, writer, RDFFormat.TURTLE);
             String finalTurtle = writer.toString();
             Files.write(Path.of("./mapping-augmented.ttl"), finalTurtle.getBytes(), StandardOpenOption.CREATE, StandardOpenOption.WRITE);
-            // System.out.println(finalTurtle);
-
-            // TODO run mapping to extract route
 
             RDFReader augmentedRMLMappingReader = new RDFReader();
             augmentedRMLMappingReader.addString(finalTurtle, RDFFormat.TURTLE);
@@ -87,15 +105,12 @@ public class TyphonRMLMain {
             Path outputRoute = routeExecutor.executeMapping(readers, Path.of("router.vm"), Path.of("route.xml"));
             System.out.println("From " + filePath + " produced " + outputRoute + " Apache Camel route.");
 
-            // TODO Convert augmented mapping to MLT mapping
-
             Path typhonRMLCompiler = Paths.get("typhon-rml-compiler.vm");
 
             Map<String,String> rmlMap = new HashMap<>();
             var rmlCompilerUtils = new RMLCompilerUtils();
 
             String baseIriRML = rmlCompilerUtils.getBaseIRI(Path.of(filePath));
-            // baseIriRML = baseIriRML != null ? baseIriRML : "http://www.cefriel.com/data/";
             rmlMap.put("baseIRI", baseIriRML);
 
             TemplateExecutor templateExecutor = new TemplateExecutor(false, false,true, null);
