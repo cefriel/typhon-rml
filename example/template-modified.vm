@@ -1,0 +1,15 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))##
+#set($reader_zbbajfbijgg = $readers.zbaahjecdfd)##
+#set($dataframe_zbbajfbijgg = $reader_zbbajfbijgg.getDataframe('{
+			    "iterator": "$[*]",
+			    "paths": {
+			    "bagjbb": "lat",
+			    "bahddj": "lon",
+			    "zbgjahccccb": "message_id",
+			    "ffbcgcje": "timestamp",
+			    "zijgfaficj": "source",
+			    "bajgebhjj": "speed" }}'))##
+id,timestamp,source,lat,lon,speed
+#foreach($i in $dataframe_zbbajfbijgg)##
+${i.zbgjahccccb}/${i.ffbcgcje},${i.ffbcgcje},${i.zijgfaficj},${i.bajgebhjj},${i.bahddj},${i.bagjbb}
+#end##
