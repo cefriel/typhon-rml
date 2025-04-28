@@ -23,14 +23,18 @@ WHERE {
     ?data_source a rml:FilePath .
     ?data_source rml:root ?root_folder .
     ?data_source rml:path ?path .
-    ?data_source rml:compression ?compression .
+    OPTIONAL { ?data_source rml:compression ?compression . }
   }
   # TODO Handle relative paths
   OPTIONAL {
     ?data_source a rml:RelativePathSource .
     ?data_source rml:root ?root_folder .
     ?data_source rml:path ?path .
-    ?data_source rml:compression ?compression .
+    OPTIONAL { ?data_source rml:compression ?compression . }
+  }
+  OPTIONAL {
+    ?data_source rml:path ?path .
+    OPTIONAL { ?data_source rml:compression ?compression . }
   }
   OPTIONAL {
     ?_source rml:referenceFormulation ?ref_form .
@@ -45,9 +49,9 @@ WHERE {
   OPTIONAL {
     ?data_source a d2rq:Database ;
 		 d2rq:jdbcDSN ?jdbcDSN ;
-		 d2rq:jdbcDriver ?jdbcDriver ;
 		 d2rq:username ?user ;
 		 d2rq:password ?password .
+     OPTIONAL {?data_source d2rq:jdbcDriver ?jdbcDriver . }
   }
 }
 "))
@@ -67,10 +71,11 @@ WHERE {
 		     "http://w3id.org/rml/XPath": "xml",
 		     "http://w3id.org/rml/CSV": "csv",
 		     "http://w3id.org/rml/SQL2008Table": "sql",
-		     "http://w3id.org/rml/SQL2008Query": "sql"})
+		     "http://w3id.org/rml/SQL2008Query": "sql",
+		     "http://www.w3.org/ns/formats/SPARQL_Results_CSV": "rdf"})
 
   #set ($compressionMap = {"http://w3id.org/rml/gzip": "gzipDeflater",
-       			   "http://w3id.org/rml/zip": "zipFile",
+			   "http://w3id.org/rml/zip": "zipFile",
 			   "http://w3id.org/rml/targz": "gzipDeflater"})
 
   #set ($var = $functions.getMap($sources, "reader_id"))
@@ -83,35 +88,41 @@ WHERE {
   #set ($inputFormat = $inputMap[$source.ref_form])
   <route id="$routeId">
 
+
   #if ($source.root_folder)
     #if ($source.root_folder == "http://w3id.org/rml/MappingDirectory")
 	#set ($dir = "./")
+	#set($filename = $source.path)
     #end
+  #elseif ($source.path)
+    #set($lastSlash = $source.path.lastIndexOf("/"))
+    #set($filename = $source.path.substring($lastSlash + 1))
+    #set($dir = $source.path.substring(0, $lastSlash + 1))
   #end
 
   ## logic for reading from files
   #if ($source.path)
     ## HACK for KGCW2025
     ## #set ($dir = "/app/data")
-    <from uri="file:${dir}?fileName=${source.path}&amp;noop=true"/>
+    <from uri="file:${dir}?fileName=${filename}&amp;noop=true"/>
 
     ## handle input compression
     #if ($source.compression)
       <unmarshal>
-        <$compressionMap[$source.compression]/>
+	<$compressionMap[$source.compression]/>
       </unmarshal>
       #if ($source.compression == "http://w3id.org/rml/targz")
-        <unmarshal>
-          <tarFile/>
-        </unmarshal>
+	<unmarshal>
+	  <tarFile/>
+	</unmarshal>
       #end
       #if ($source.compression == "http://w3id.org/rml/zip")
-        <split stopOnException="true">
-          <simple>${d}{body}</simple>
-        <convertBodyTo type="java.lang.String"/>
+	<split stopOnException="true">
+	  <simple>${d}{body}</simple>
+	<convertBodyTo type="java.lang.String"/>
     </split>
       #end
-    #end 
+    #end
 
     <convertBodyTo type="java.lang.String"/>
   #end
@@ -134,13 +145,19 @@ WHERE {
       <constant>$inputMap[$source.ref_form]</constant>
     </setVariable>
 
+    #if ($source.path)
+    <setVariable name="readerInputFile">
+      <constant>$source.path</constant>
+    </setVariable>
+    #end
+
     <setVariable name="readerName">
       <constant>$readerName</constant>
     </setVariable>
 
     <to uri="direct:aggregate"/>
-    </route>    
-  #end  
+    </route>
+  #end
 
   <route id="readersAggregation">
   <from uri="direct:aggregate" />

@@ -3,15 +3,19 @@ package com.cefriel;
 import com.cefriel.template.io.Reader;
 import com.cefriel.template.io.csv.CSVReader;
 import com.cefriel.template.io.json.JSONReader;
+import com.cefriel.template.io.rdf.RDFReader;
 import com.cefriel.template.io.sql.SQLReader;
 import com.cefriel.template.io.xml.XMLReader;
 import com.cefriel.template.utils.Util;
 import org.apache.camel.AggregationStrategy;
 import org.apache.camel.Exchange;
+import org.eclipse.rdf4j.rio.RDFFormat;
+import org.eclipse.rdf4j.rio.Rio;
 
 import java.security.InvalidParameterException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class ReadersAggregation implements AggregationStrategy {
 
@@ -55,6 +59,18 @@ public class ReadersAggregation implements AggregationStrategy {
                 }
             }
             case "csv" -> new CSVReader(readerContent);
+            case "rdf" -> {
+                RDFReader rdfReader = new RDFReader();
+                String rmlPath = exchange.getVariable("readerInputFile", String.class);
+                Optional<RDFFormat> rdfFormat = Rio.getParserFormatForFileName(rmlPath);
+                try {
+                    if (rdfFormat.isPresent())
+                        rdfReader.addString(readerContent, rdfFormat.get());
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                yield rdfReader;
+            }
             default -> throw new InvalidParameterException("Cannot create Reader for format: " + readerFormat);
         };
 
