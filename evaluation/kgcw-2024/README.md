@@ -13,8 +13,9 @@ The challenge was executed using the official execution tool provided by the [KG
 
 222 out of 238 tests for the challenge pass successfully.
 16 tests fail due to intended differences in how typhon-rml handles missing files and/or missing data attributes.
+The `route.xml` and `template.vm` files generated from the `mapping.ttl` files are available in [../kgcw-2024/](../kgcw-2024/).
 
-## Failing Tests
+### Failing Tests
 
 | No. | Test Case             | Reason                                                                                       |
 |-----|-----------------------|----------------------------------------------------------------------------------------------|
