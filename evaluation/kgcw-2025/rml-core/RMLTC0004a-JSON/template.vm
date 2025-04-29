@@ -1,0 +1,11 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_bccheecgcf = $readers.biaabfjhej) #set($dataframe_bccheecgcf = $reader_bccheecgcf.getDataframe('{
+    "iterator": "$.students[*]",
+    "paths": {
+"caabfcacaj": "Student" }}'))#set($reader_bccheecfib = $readers.biaabfjhej) #set($dataframe_bccheecfib = $reader_bccheecfib.getDataframe('{
+    "iterator": "$.students[*]",
+    "paths": {
+"zbabcfgfhfa": "Sport" }}'))#foreach($i in $dataframe_bccheecgcf)<$functions.resolveIRI("http://example.com/${i.caabfcacaj}")> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/Student> .
+#set($refs = [${i.caabfcacaj}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/${i.caabfcacaj}")> <http://xmlns.com/foaf/0.1/name> "${i.caabfcacaj}" .
+#end#end#foreach($i in $dataframe_bccheecfib)<$functions.resolveIRI("http://example.com/${i.zbabcfgfhfa}")> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/Sport> .
+#set($refs = [${i.zbabcfgfhfa}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/${i.zbabcfgfhfa}")> <http://xmlns.com/foaf/0.1/name> "${i.zbabcfgfhfa}" .
+#end#end

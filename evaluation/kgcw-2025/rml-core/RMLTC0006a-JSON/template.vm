@@ -1,0 +1,2 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_zcaajjjbdhf = $readers.dahfjhj)#set($dataframe_zcaajjjbdhf = [{"ITERATOR" : "ONCE"}])#foreach($i in $dataframe_zcaajjjbdhf)#set($refs = [])#if($functions.checkStrings($refs))<http://example.com/BadStudent> <http://example.com/description> "Bad Student" <http://example.com/graph/student> .
+#end#end

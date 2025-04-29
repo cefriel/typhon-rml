@@ -1,0 +1,5 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_fdcbedbjj = $readers.dahfjhj) #set($dataframe_fdcbedbjj = $reader_fdcbedbjj.getDataframe('{
+    "iterator": "$.students[*]",
+    "paths": {
+"cecadjf": "Name" }}'))#foreach($i in $dataframe_fdcbedbjj)<$functions.resolveIRI("http://example.com/{${i.cecadjf}}")> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> .
+#end

@@ -1,0 +1,10 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_cjhgdedhf = $readers.bijfgecbhh)   #set($dataframe_cjhgdedhf = $reader_cjhgdedhf.getDataframe('{
+    "iterator": "$.persons[*]",
+    "paths": {
+"zjjfajcafh": "fname",
+"zjijffajdb": "lname",
+"zjcghcgibe": "amount" }}'))#foreach($i in $dataframe_cjhgdedhf)#set($refs = [${i.zjcghcgibe}, ${i.zjjfajcafh}, ${i.zjijffajdb}])#if($functions.checkStrings($refs))_:$functions.encodeURIComponent("${i.zjjfajcafh}_${i.zjijffajdb}_${i.zjcghcgibe}") <http://xmlns.com/foaf/0.1/name> "${i.zjjfajcafh} ${i.zjijffajdb}" .
+#end#set($refs = [${i.zjcghcgibe}, ${i.zjjfajcafh}, ${i.zjijffajdb}])#if($functions.checkStrings($refs))_:$functions.encodeURIComponent("${i.zjjfajcafh}_${i.zjijffajdb}_${i.zjcghcgibe}") <http://example.com/amount> "${i.zjcghcgibe}" .
+#end#set($refs = [${i.zjcghcgibe}, ${i.zjjfajcafh}, ${i.zjijffajdb}])#if($functions.checkStrings($refs))_:$functions.encodeURIComponent("${i.zjjfajcafh}_${i.zjijffajdb}_${i.zjcghcgibe}") <http://example.com/amount> "${i.zjcghcgibe}" .
+#end#set($refs = [${i.zjcghcgibe}, ${i.zjjfajcafh}, ${i.zjijffajdb}])#if($functions.checkStrings($refs))_:$functions.encodeURIComponent("${i.zjjfajcafh}_${i.zjijffajdb}_${i.zjcghcgibe}") <http://xmlns.com/foaf/0.1/name> "${i.zjjfajcafh} ${i.zjijffajdb}" .
+#end#end

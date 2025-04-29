@@ -1,0 +1,13 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_zigcefghef = $readers.dahfjhj)   #set($dataframe_zigcefghef = $reader_zigcefghef.getDataframe('{
+    "iterator": "$.students[*]",
+    "paths": {
+"bbbjabd": "ID",
+"zbabcfgfhfa": "Sport",
+"bahfffbhjh": "Name" }}'))#set($reader_zigcefghjc = $readers.dgieaabjf)  #set($dataframe_zigcefghjc = $reader_zigcefghjc.getDataframe('{
+    "iterator": "$.sports[*]",
+    "paths": {
+"bbbjabd": "ID",
+"bahfffbhjh": "Name" }}'))#if(!$dataframe_join_edcbjacif)#set($dataframe_join_edcbjacif = $functions.getListMap($dataframe_zigcefghjc, "bbbjabd"))#end#foreach($i in $dataframe_zigcefghef)#if($functions.checkString($i.zbabcfgfhfa))#foreach($j in $dataframe_join_edcbjacif.get($i.zbabcfgfhfa))#set($refs = [${j.bbbjabd}, ${i.bbbjabd}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/resource/student_${i.bbbjabd}")> <http://example.com/ontology/practises> <$functions.resolveIRI("http://example.com/resource/sport_${j.bbbjabd}")> .
+#end#end#end#set($refs = [${i.bahfffbhjh}, ${i.bbbjabd}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/resource/student_${i.bbbjabd}")> <http://xmlns.com/foaf/0.1/name> "${i.bahfffbhjh}" .
+#end#end#foreach($i in $dataframe_zigcefghjc)#set($refs = [${i.bahfffbhjh}, ${i.bbbjabd}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/resource/sport_${i.bbbjabd}")> <$functions.resolveIRI("http://www.w3.org/2000/01/rdf-schema${esc.h}label")> "${i.bahfffbhjh}" .
+#end#end

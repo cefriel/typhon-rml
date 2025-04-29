@@ -1,0 +1,6 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_dfjbgdfcj = $readers.dahfjhj)  #set($dataframe_dfjbgdfcj = $reader_dfjbgdfcj.getDataframe('{
+    "iterator": "$.students[*]",
+    "paths": {
+"bbbjabd": "ID",
+"bahfffbhjh": "Name" }}'))#foreach($i in $dataframe_dfjbgdfcj)#set($refs = [${i.bahfffbhjh}, ${i.bbbjabd}])#if($functions.checkStrings($refs))_:$functions.encodeURIComponent("students${i.bbbjabd}") <http://xmlns.com/foaf/0.1/name> "${i.bahfffbhjh}" .
+#end#end

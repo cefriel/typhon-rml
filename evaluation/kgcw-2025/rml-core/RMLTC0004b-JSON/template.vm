@@ -1,0 +1,5 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_bgecdbgjhe = $readers.dahfjhj) #set($dataframe_bgecdbgjhe = $reader_bgecdbgjhe.getDataframe('{
+    "iterator": "$.students[*]",
+    "paths": {
+"bahfffbhjh": "Name" }}'))#foreach($i in $dataframe_bgecdbgjhe)#set($refs = [${i.bahfffbhjh}, ${$.Name}])#if($functions.checkStrings($refs))$error: subject can not be of type Literal.http://example.com/${$.Name} <http://xmlns.com/foaf/0.1/name> "${i.bahfffbhjh}" .
+#end#end

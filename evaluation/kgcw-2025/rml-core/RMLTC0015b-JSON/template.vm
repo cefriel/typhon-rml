@@ -1,0 +1,11 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_jedheegeb = $readers.ziidhcgcaf)  #set($dataframe_jedheegeb = $reader_jedheegeb.getDataframe('{
+    "iterator": "$.countries[*]",
+    "paths": {
+"bahfcdhchb": "Code",
+"bahfffbhjh": "Name" }}'))#set($reader_jedheegdg = $readers.ziidhcgcaf)  #set($dataframe_jedheegdg = $reader_jedheegdg.getDataframe('{
+    "iterator": "$.countries[*]",
+    "paths": {
+"bahfcdhchb": "Code",
+"bahfffbhjh": "Name" }}'))#foreach($i in $dataframe_jedheegeb)#set($refs = [${i.bahfffbhjh}, ${i.bahfcdhchb}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/${i.bahfcdhchb}")> <$functions.resolveIRI("http://www.w3.org/2000/01/rdf-schema${esc.h}label")> $functions.resolveLanguage("${i.bahfffbhjh}","a-spanish") .
+#end#end#foreach($i in $dataframe_jedheegdg)#set($refs = [${i.bahfffbhjh}, ${i.bahfcdhchb}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/${i.bahfcdhchb}")> <$functions.resolveIRI("http://www.w3.org/2000/01/rdf-schema${esc.h}label")> $functions.resolveLanguage("${i.bahfffbhjh}","a-english") .
+#end#end
