@@ -1,6 +1,6 @@
 # KGCW2024 Typhon-RML Benchmark Results
 
-This benchmark was run using the following Docker image for **Typhon-RML**:
+The benchmark was run using the following Docker image for **Typhon-RML**:
 
 ```bash
 docker pull cefriel/typhon-rml:v0.2
@@ -8,9 +8,9 @@ docker pull cefriel/typhon-rml:v0.2
 
 The challenge was executed using the official execution tool provided by the [KG-construct challenge](https://github.com/kg-construct/exectool):
 
-## Results
+## Rml-Core Results
 
-222 out of 238 tests for the challenge pass successfully.
+222 out of 238 tests for the `rml-core` challenge pass successfully.
 16 tests fail due to intended differences in how typhon-rml handles missing files and/or missing data attributes.
 The `route.xml` and `template.vm` files generated from the `mapping.ttl` files are available in [../kgcw-2024/rml-core/](../kgcw-2024/rml-core/).
 
