@@ -1,0 +1,3 @@
+#set($foo = $functions.setBaseIRI("http://example.com/rules/"))#set($reader_gdeaddgfg = $readers.bacjjdijjj)#set($foo = $reader_gdeaddgfg.setHashVariable(true))#set($foo = $reader_gdeaddgfg.setOnlyDistinct(true))#set($columns = "id,age,name")#set($dataframe_gdeaddgfg = $reader_gdeaddgfg.getDataframe($columns))#foreach($i in $dataframe_gdeaddgfg)#set($refs = [${i.ddff}, ${i.jgfbb}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.org/${i.ddff}")> <http://xmlns.com/foaf/0.1/age> "${i.jgfbb}" .
+#end#set($refs = [${i.ddff}, ${i.ddhdhah}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.org/${i.ddff}")> <http://xmlns.com/foaf/0.1/name> "${i.ddhdhah}" .
+#end#end

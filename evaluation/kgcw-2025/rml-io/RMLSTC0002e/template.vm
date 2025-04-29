@@ -1,0 +1,8 @@
+#set($foo = $functions.setBaseIRI("http://example.com/rules/"))#set($reader_ccjcdehib = $readers.bggiahabje)   #set($dataframe_ccjcdehib = $reader_ccjcdehib.getDataframe('{
+    "iterator": "$[*]",
+    "paths": {
+"bbcaadh": "id",
+"bahgfafbaj": "name",
+"dehbdgfd": "age" }}'))#foreach($i in $dataframe_ccjcdehib)#set($refs = [${i.bahgfafbaj}, ${i.bbcaadh}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.org/${i.bbcaadh}")> <http://xmlns.com/foaf/0.1/name> "${i.bahgfafbaj}" .
+#end#set($refs = [${i.dehbdgfd}, ${i.bbcaadh}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.org/${i.bbcaadh}")> <http://xmlns.com/foaf/0.1/age> "${i.dehbdgfd}" .
+#end#end

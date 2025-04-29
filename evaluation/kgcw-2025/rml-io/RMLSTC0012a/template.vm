@@ -1,0 +1,5 @@
+#set($foo = $functions.setBaseIRI("http://example.com/rules/"))#set($reader_bejcdiejgd = $readers.zbajjihafba)#set($foo = $reader_bejcdiejgd.setOnlyDistinct(true))  #set($dataframe_bejcdiejgd = $reader_bejcdiejgd.getDataframe('for $i in /companies/company
+    return map {
+"geifj": $i/@id,
+"ddhdhah": $i/name/text() }'))#foreach($i in $dataframe_bejcdiejgd)#set($refs = [${i.geifj}, ${i.ddhdhah}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.org/${i.geifj}")> <http://xmlns.com/foaf/0.1/name> "${i.ddhdhah}" .
+#end#end

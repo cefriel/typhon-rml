@@ -1,0 +1,6 @@
+#set($foo = $functions.setBaseIRI("http://example.com/rules/"))#set($reader_zfcbcdafdd = $readers.egejiadda)  #set($dataframe_zfcbcdafdd = $reader_zfcbcdafdd.getDataframe('{
+    "iterator": "$.companies[*].departments[*]",
+    "paths": {
+"ddhdhah": "name",
+"zeejefafha": "manager.name" }}'))#foreach($i in $dataframe_zfcbcdafdd)#set($refs = [${i.zeejefafha}, ${i.ddhdhah}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.org/${i.ddhdhah}")> <http://xmlns.com/foaf/0.1/name> "${i.zeejefafha}" .
+#end#end
