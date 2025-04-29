@@ -1,0 +1,6 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_hiccghchg = $readers.zfffbfafbd)#set($foo = $reader_hiccghchg.setOnlyDistinct(true))   #set($dataframe_hiccghchg = $reader_hiccghchg.getDataframe('for $i in /countries/country
+    return map {
+"bjaiabfdj": $i/CountryCode/text(),
+"cecadjf": $i/Name/text(),
+"zbeiajgcbhd": $i/ISO3166/text() }'))#foreach($i in $dataframe_hiccghchg)#set($refs = [${i.cecadjf}, ${i.bjaiabfdj}, ${i.zbeiajgcbhd}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/${i.bjaiabfdj}/${i.cecadjf}")> <http://example.com/code> "{{{ ${i.zbeiajgcbhd} }}}" .
+#end#end

@@ -1,0 +1,13 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_igfgbfeca = $readers.dahfjhj)  #set($dataframe_igfgbfeca = $reader_igfgbfeca.getDataframe('{
+    "iterator": "$.students[*]",
+    "paths": {
+"cddb": "ID",
+"cecadjf": "Name" }}'))#set($reader_igfgbfegi = $readers.dahfjhj) #set($dataframe_igfgbfegi = $reader_igfgbfegi.getDataframe('{
+    "iterator": "$.students[*]",
+    "paths": {
+"iaajjbfg": "Sport" }}'))#if(!$dataframe_join_igfgbfegi)#set($dataframe_join_igfgbfegi = $dataframe_igfgbfegi)#end#foreach($i in $dataframe_igfgbfeca)#set($refs = [${i.cecadjf}, ${i.cddb}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/Student/${i.cddb}/${i.cecadjf}")> <$functions.resolveIRI("http://www.w3.org/1999/02/22-rdf-syntax-ns${esc.h}type")> <http://xmlns.com/foaf/0.1/Person> .
+#end#foreach($j in $dataframe_join_igfgbfegi)#set($refs = [${i.cecadjf}, ${j.iaajjbfg}, ${i.cddb}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/Student/${i.cddb}/${i.cecadjf}")> <http://example.com/Sport> <$functions.resolveIRI("http://example.com/${j.iaajjbfg}")> .
+#end#end#set($refs = [${i.cecadjf}, ${i.cddb}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/Student/${i.cddb}/${i.cecadjf}")> <http://example.com/id> "${i.cddb}" .
+#end#set($refs = [${i.cecadjf}, ${i.cddb}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/Student/${i.cddb}/${i.cecadjf}")> <http://xmlns.com/foaf/0.1/name> "${i.cecadjf}" .
+#end#end#foreach($i in $dataframe_igfgbfegi)#set($refs = [${i.iaajjbfg}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/${i.iaajjbfg}")> <$functions.resolveIRI("http://www.w3.org/1999/02/22-rdf-syntax-ns${esc.h}type")> <http://example.com/activity/Sport> .
+#end#end

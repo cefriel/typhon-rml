@@ -1,0 +1,11 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_bbfjdchaha = $readers.gadfiajfg)#set($foo = $reader_bbfjdchaha.setOnlyDistinct(true))  #set($dataframe_bbfjdchaha = $reader_bbfjdchaha.getDataframe('for $i in /sports/sport
+    return map {
+"cddb": $i/ID/text(),
+"cecadjf": $i/Name/text() }'))#set($reader_bbfjdchaeh = $readers.iicbjbihc)#set($foo = $reader_bbfjdchaeh.setOnlyDistinct(true))   #set($dataframe_bbfjdchaeh = $reader_bbfjdchaeh.getDataframe('for $i in /students/student
+    return map {
+"cddb": $i/ID/text(),
+"cecadjf": $i/Name/text(),
+"iaajjbfg": $i/Sport/text() }'))#if(!$dataframe_join_bhbghigjdh)#set($dataframe_join_bhbghigjdh = $functions.getListMap($dataframe_bbfjdchaha, "cddb"))#end#foreach($i in $dataframe_bbfjdchaha)#set($refs = [${i.cecadjf}, ${i.cddb}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/resource/sport_${i.cddb}")> <$functions.resolveIRI("http://www.w3.org/2000/01/rdf-schema${esc.h}label")> "${i.cecadjf}" .
+#end#end#foreach($i in $dataframe_bbfjdchaeh)#set($refs = [${i.cecadjf}, ${i.cddb}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/resource/student_${i.cddb}")> <http://xmlns.com/foaf/0.1/name> "${i.cecadjf}" .
+#end#if($functions.checkString($i.iaajjbfg))#foreach($j in $dataframe_join_bhbghigjdh.get($i.iaajjbfg))#set($refs = [${i.cddb}, ${j.cddb}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/resource/student_${i.cddb}")> <http://example.com/ontology/practises> <$functions.resolveIRI("http://example.com/resource/sport_${j.cddb}")> .
+#end#end#end#end

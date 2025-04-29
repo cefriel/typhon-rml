@@ -1,0 +1,8 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_gcadbhjhi = $readers.iicbjbihc)#set($foo = $reader_gcadbhjhi.setOnlyDistinct(true))  #set($dataframe_gcadbhjhi = $reader_gcadbhjhi.getDataframe('for $i in /students/student
+    return map {
+"cddb": $i/ID/text(),
+"cbdgiadged": $i/FirstName/text() }'))#foreach($i in $dataframe_gcadbhjhi)<$functions.resolveIRI("http://example.com/Student/${i.cddb}/${i.cbdgiadged}")> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> .
+<$functions.resolveIRI("http://example.com/Student/${i.cddb}/${i.cbdgiadged}")> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/Student> .
+#set($refs = [${i.cddb}, ${i.cbdgiadged}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/Student/${i.cddb}/${i.cbdgiadged}")> <http://xmlns.com/foaf/0.1/name> "${i.cbdgiadged}" .
+#end#set($refs = [${i.cddb}, ${i.cbdgiadged}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/Student/${i.cddb}/${i.cbdgiadged}")> <http://example.com/id> "${i.cddb}" .
+#end#end

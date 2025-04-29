@@ -1,0 +1,11 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_zghaiiciib = $readers.gjejfbebj)#set($foo = $reader_zghaiiciib.setHashVariable(true))#set($foo = $reader_zghaiiciib.setOnlyDistinct(true))#set($columns = "name,sportcount")#set($dataframe_zghaiiciib = $reader_zghaiiciib.getFilteredDataFrame("
+        SELECT Name, COUNT(Sport) as SPORTCOUNT
+        FROM Student
+        GROUP BY Name
+        ", $columns))#set($types_zghaiiciib = $reader_zghaiiciib.getColumnTypes("
+        SELECT Name, COUNT(Sport) as SPORTCOUNT
+        FROM Student
+        GROUP BY Name
+        "))#set($columns = $types_zghaiiciib.keySet())#set($refColumns = ["name","sportcount"])#foreach($column in $refColumns)#if(!$columns.contains($column))$error: "$column not found in $dataframe_zghaiiciib."#end#end#foreach($i in $dataframe_zghaiiciib)#set($refs = [${i.ddhdhah}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/resource/student_${i.ddhdhah}")> <http://xmlns.com/foaf/0.1/name> $functions.resolveSQLDatatype("${i.ddhdhah}", $types_zghaiiciib.get("name")) .
+#end#set($refs = [${i.zfbjhcif}, ${i.ddhdhah}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/resource/student_${i.ddhdhah}")> <http://example.com/numSport> $functions.resolveSQLDatatype("${i.zfbjhcif}", $types_zghaiiciib.get("sportcount")) .
+#end#end

@@ -1,0 +1,14 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_zbdfceacicg = $readers.zbbifeicddg)#set($foo = $reader_zbdfceacicg.setHashVariable(true))#set($foo = $reader_zbdfceacicg.setOnlyDistinct(true))#set($columns = "empno,ROLE")#set($dataframe_zbdfceacicg = $reader_zbdfceacicg.getFilteredDataFrame("
+      SELECT EMP.*, (CASE job
+        WHEN 'CLERK' THEN 'general-office'
+        WHEN 'NIGHTGUARD' THEN 'security'
+        WHEN 'ENGINEER' THEN 'engineering'
+      END) AS ROLE FROM EMP
+    ", $columns))#set($types_zbdfceacicg = $reader_zbdfceacicg.getColumnTypes("
+      SELECT EMP.*, (CASE job
+        WHEN 'CLERK' THEN 'general-office'
+        WHEN 'NIGHTGUARD' THEN 'security'
+        WHEN 'ENGINEER' THEN 'engineering'
+      END) AS ROLE FROM EMP
+    "))#set($columns = $types_zbdfceacicg.keySet())#set($refColumns = ["empno","ROLE"])#foreach($column in $refColumns)#if(!$columns.contains($column))$error: "$column not found in $dataframe_zbdfceacicg."#end#end#foreach($i in $dataframe_zbdfceacicg)#set($refs = [${i.jggddjjd}, ${i.cfcbcag}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://data.example.com/employee/${i.jggddjjd}")> <$functions.resolveIRI("http://example.com/ns${esc.h}role")> <$functions.resolveIRI("http://data.example.com/roles/${i.cfcbcag}")> .
+#end#end

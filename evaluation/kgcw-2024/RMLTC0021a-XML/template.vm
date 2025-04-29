@@ -1,0 +1,6 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_zbaagiaijh = $readers.iicbjbihc)#set($foo = $reader_zbaagiaijh.setOnlyDistinct(true))   #set($dataframe_zbaagiaijh = $reader_zbaagiaijh.getDataframe('for $i in /students/student
+    return map {
+"iaajjbfg": $i/Sport/text(),
+"cddb": $i/ID/text(),
+"cecadjf": $i/Name/text() }'))#if(!$dataframe_join_zbdgaaiied)#set($dataframe_join_zbdgaaiied = $functions.getListMap($dataframe_zbaagiaijh, "iaajjbfg"))#end#foreach($i in $dataframe_zbaagiaijh)#if($functions.checkString($i.iaajjbfg))#foreach($j in $dataframe_join_zbdgaaiied.get($i.iaajjbfg))#set($refs = [${i.cecadjf}, ${j.cecadjf}, ${i.cddb}, ${j.cddb}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/Student/${i.cddb}/${i.cecadjf}")> <http://example.com/sameSportAs> <$functions.resolveIRI("http://example.com/Student/${j.cddb}/${j.cecadjf}")> .
+#end#end#end#end

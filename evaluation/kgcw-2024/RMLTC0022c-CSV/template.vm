@@ -1,0 +1,2 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_bcffegiajh = $readers.zhjcgbiif)#set($foo = $reader_bcffegiajh.setHashVariable(true))#set($foo = $reader_bcffegiajh.setOnlyDistinct(true))#set($columns = "FOO,BAR")#set($dataframe_bcffegiajh = $reader_bcffegiajh.getDataframe($columns))#foreach($i in $dataframe_bcffegiajh)#set($refs = [${i.gjhji}, ${i.gffcd}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/${i.gjhji}")> <http://example.com/x> $functions.resolveDatatype("${i.gjhji}","datatype${esc.h}${i.gffcd}") .
+#end#end

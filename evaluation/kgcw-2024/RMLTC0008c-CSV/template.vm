@@ -1,0 +1,3 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_zejbcedfia = $readers.jjgfjdiea)#set($foo = $reader_zejbcedfia.setHashVariable(true))#set($foo = $reader_zejbcedfia.setOnlyDistinct(true))#set($columns = "ID,Name")#set($dataframe_zejbcedfia = $reader_zejbcedfia.getDataframe($columns))#foreach($i in $dataframe_zejbcedfia)#set($refs = [${i.cecadjf}, ${i.cddb}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/Student/${i.cddb}/${i.cecadjf}")> <http://xmlns.com/foaf/0.1/name> "${i.cecadjf}" .
+#end#set($refs = [${i.cecadjf}, ${i.cddb}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/Student/${i.cddb}/${i.cecadjf}")> <http://example.com/name> "${i.cecadjf}" .
+#end#end

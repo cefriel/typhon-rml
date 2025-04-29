@@ -1,0 +1,10 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_zcafjigdega = $readers.gahdeaeia)#set($foo = $reader_zcafjigdega.setOnlyDistinct(true))   #set($dataframe_zcafjigdega = $reader_zcafjigdega.getDataframe('for $i in /Lives/Live
+    return map {
+"jhfhciej": $i/fname/text(),
+"badbbdjhf": $i/lname/text(),
+"dafdjdb": $i/city/text() }'))#set($reader_zcafjigdeff = $readers.bjbahdhfjd)#set($foo = $reader_zcafjigdeff.setOnlyDistinct(true))  #set($dataframe_zcafjigdeff = $reader_zcafjigdeff.getDataframe('for $i in /Persons/Person
+    return map {
+"jhfhciej": $i/fname/text(),
+"badbbdjhf": $i/lname/text() }'))#foreach($i in $dataframe_zcafjigdega)#set($refs = [${i.dafdjdb}, ${i.jhfhciej}, ${i.badbbdjhf}])#if($functions.checkStrings($refs))_:$functions.encodeURIComponent("${i.jhfhciej}${i.badbbdjhf}") <http://example.com/city> "${i.dafdjdb}" .
+#end#end#foreach($i in $dataframe_zcafjigdeff)#set($refs = [${i.jhfhciej}, ${i.badbbdjhf}])#if($functions.checkStrings($refs))_:$functions.encodeURIComponent("${i.jhfhciej}${i.badbbdjhf}") <http://xmlns.com/foaf/0.1/name> "${i.jhfhciej} ${i.badbbdjhf}" .
+#end#end

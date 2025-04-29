@@ -1,0 +1,10 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_zjhjgjhfdg = $readers.gjejfbebj)#set($foo = $reader_zjhjgjhfdg.setHashVariable(true))#set($foo = $reader_zjhjgjhfdg.setOnlyDistinct(true))#set($columns = "firstname")#set($dataframe_zjhjgjhfdg = $reader_zjhjgjhfdg.getFilteredDataFrame("
+        SELECT ID, FirstName, LastName
+        FROM Employee
+        WHERE ID < 30
+     ", $columns))#set($types_zjhjgjhfdg = $reader_zjhjgjhfdg.getColumnTypes("
+        SELECT ID, FirstName, LastName
+        FROM Employee
+        WHERE ID < 30
+     "))#set($columns = $types_zjhjgjhfdg.keySet())#set($refColumns = ["firstname"])#foreach($column in $refColumns)#if(!$columns.contains($column))$error: "$column not found in $dataframe_zjhjgjhfdg."#end#end#foreach($i in $dataframe_zjhjgjhfdg)#set($refs = [${i.bddhiijih}])#if($functions.checkStrings($refs))<$functions.resolveIRI("${i.bddhiijih}")> <http://xmlns.com/foaf/0.1/name> $functions.resolveSQLDatatype("${i.bddhiijih}", $types_zjhjgjhfdg.get("firstname")) .
+#end#end

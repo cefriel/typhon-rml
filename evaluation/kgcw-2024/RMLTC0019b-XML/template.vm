@@ -1,0 +1,4 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_jgbieajhj = $readers.bjbahdhfjd)#set($foo = $reader_jgbieajhj.setOnlyDistinct(true)) #set($dataframe_jgbieajhj = $reader_jgbieajhj.getDataframe('for $i in /persons/person
+    return map {
+"cbdgiadged": $i/FirstName/text() }'))#foreach($i in $dataframe_jgbieajhj)#set($refs = [${i.cbdgiadged}])#if($functions.checkStrings($refs))<$functions.resolveIRI("${i.cbdgiadged}")> <http://xmlns.com/foaf/0.1/name> "${i.cbdgiadged}" .
+#end#end

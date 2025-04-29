@@ -1,0 +1,16 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_badaigcged = $readers.iicbjbihc)#set($foo = $reader_badaigcged.setOnlyDistinct(true))   #set($dataframe_badaigcged = $reader_badaigcged.getDataframe('for $i in /Students/Student
+    return map {
+"cddb": $i/ID/text(),
+"zbdjejffghj": $i/LastName/text(),
+"cbdgiadged": $i/FirstName/text() }'))#set($reader_badaigcgga = $readers.gadfiajfg)#set($foo = $reader_badaigcgga.setOnlyDistinct(true))  #set($dataframe_badaigcgga = $reader_badaigcgga.getDataframe('for $i in /Sports/Sport
+    return map {
+"cddb": $i/ID/text(),
+"zfgghhebc": $i/Description/text() }'))#set($reader_badaigcgei = $readers.zefhjjbajg)#set($foo = $reader_badaigcgei.setOnlyDistinct(true))  #set($dataframe_badaigcgei = $reader_badaigcgei.getDataframe('for $i in /links/link
+    return map {
+"zbjgeghbceb": $i/ID_Student/text(),
+"bdjghbccea": $i/ID_Sport/text() }'))#foreach($i in $dataframe_badaigcged)#set($refs = [${i.zbdjejffghj}, ${i.cddb}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/student/${i.cddb}")> <http://example.com/lastName> "${i.zbdjejffghj}" .
+#end#set($refs = [${i.cddb}, ${i.cbdgiadged}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/student/${i.cddb}")> <http://example.com/firstName> "${i.cbdgiadged}" .
+#end#end#foreach($i in $dataframe_badaigcgga)#set($refs = [${i.cddb}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/sport/${i.cddb}")> <http://example.com/id> "${i.cddb}" .
+#end#set($refs = [${i.zfgghhebc}, ${i.cddb}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/sport/${i.cddb}")> <http://example.com/description> "${i.zfgghhebc}" .
+#end#end#foreach($i in $dataframe_badaigcgei)#set($refs = [${i.zbjgeghbceb}, ${i.bdjghbccea}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/student/${i.zbjgeghbceb}")> <http://example.com/plays> <$functions.resolveIRI("http://example.com/sport/${i.bdjghbccea}")> .
+#end#end

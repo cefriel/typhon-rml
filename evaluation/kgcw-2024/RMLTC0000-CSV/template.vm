@@ -1,0 +1,2 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_zbcieeejgae = $readers.jjgfjdiea)#set($foo = $reader_zbcieeejgae.setHashVariable(true))#set($foo = $reader_zbcieeejgae.setOnlyDistinct(true))#set($columns = "Name")#set($dataframe_zbcieeejgae = $reader_zbcieeejgae.getDataframe($columns))#foreach($i in $dataframe_zbcieeejgae)#set($refs = [${i.cecadjf}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/${i.cecadjf}")> <http://xmlns.com/foaf/0.1/name> "${i.cecadjf}" .
+#end#end

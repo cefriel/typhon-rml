@@ -1,0 +1,7 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_zjdcbijhbc = $readers.iicbjbihc)#set($foo = $reader_zjdcbijhbc.setOnlyDistinct(true))  #set($dataframe_zjdcbijhbc = $reader_zjdcbijhbc.getDataframe('for $i in /students/student
+    return map {
+"cddb": $i/ID/text(),
+"cecadjf": $i/Name/text() }'))#foreach($i in $dataframe_zjdcbijhbc)<$functions.resolveIRI("http://example.com/Student/${i.cddb}/${i.cecadjf}")> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> <http://example.com/PersonGraph>.
+#set($refs = [${i.cecadjf}, ${i.cddb}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/Student/${i.cddb}/${i.cecadjf}")> <http://xmlns.com/foaf/0.1/name> "${i.cecadjf}" <http://example.com/PersonGraph> .
+#end#set($refs = [${i.cecadjf}, ${i.cddb}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/Student/${i.cddb}/${i.cecadjf}")> <http://example.com/id> "${i.cddb}" <http://example.com/PersonGraph> .
+#end#end

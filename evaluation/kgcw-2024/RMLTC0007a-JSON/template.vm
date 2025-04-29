@@ -1,0 +1,6 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_zfiiehcbhf = $readers.dahfjhj)  #set($dataframe_zfiiehcbhf = $reader_zfiiehcbhf.getDataframe('{
+    "iterator": "$.students[*]",
+    "paths": {
+"cddb": "ID",
+"cbdgiadged": "FirstName" }}'))#foreach($i in $dataframe_zfiiehcbhf)#set($refs = [${i.cddb}, ${i.cbdgiadged}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/Student/${i.cddb}/${i.cbdgiadged}")> <$functions.resolveIRI("http://www.w3.org/1999/02/22-rdf-syntax-ns${esc.h}type")> <http://xmlns.com/foaf/0.1/Person> .
+#end#end

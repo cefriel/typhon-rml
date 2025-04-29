@@ -1,0 +1,4 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_bbhgiddihd = $readers.iicbjbihc)#set($foo = $reader_bbhgiddihd.setOnlyDistinct(true)) #set($dataframe_bbhgiddihd = $reader_bbhgiddihd.getDataframe('for $i in /students/student
+    return map {
+"cecadjf": $i/Name/text() }'))#foreach($i in $dataframe_bbhgiddihd)#set($refs = [${i.cecadjf}, ${Name}])#if($functions.checkStrings($refs))$error: subject can not be of type Literal.http://example.com/${Name} <http://xmlns.com/foaf/0.1/name> "${i.cecadjf}" .
+#end#end

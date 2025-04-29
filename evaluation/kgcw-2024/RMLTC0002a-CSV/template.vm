@@ -1,0 +1,4 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_bcdhbadii = $readers.jjgfjdiea)#set($foo = $reader_bcdhbadii.setHashVariable(true))#set($foo = $reader_bcdhbadii.setOnlyDistinct(true))#set($columns = "ID,Name")#set($dataframe_bcdhbadii = $reader_bcdhbadii.getDataframe($columns))#foreach($i in $dataframe_bcdhbadii)<$functions.resolveIRI("http://example.com/${i.cddb}/${i.cecadjf}")> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> .
+#set($refs = [${i.cecadjf}, ${i.cddb}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/${i.cddb}/${i.cecadjf}")> <http://xmlns.com/foaf/0.1/name> "${i.cecadjf}" .
+#end#set($refs = [${i.cecadjf}, ${i.cddb}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/${i.cddb}/${i.cecadjf}")> <http://example.com/id> "${i.cddb}" .
+#end#end

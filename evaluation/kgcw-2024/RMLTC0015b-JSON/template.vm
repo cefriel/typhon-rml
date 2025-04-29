@@ -1,0 +1,11 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_zjdafbiagh = $readers.ziidhcgcaf)  #set($dataframe_zjdafbiagh = $reader_zjdafbiagh.getDataframe('{
+    "iterator": "$.countries[*]",
+    "paths": {
+"cbafigj": "Code",
+"cecadjf": "Name" }}'))#set($reader_zjdafbiaei = $readers.ziidhcgcaf)  #set($dataframe_zjdafbiaei = $reader_zjdafbiaei.getDataframe('{
+    "iterator": "$.countries[*]",
+    "paths": {
+"cbafigj": "Code",
+"cecadjf": "Name" }}'))#foreach($i in $dataframe_zjdafbiagh)#set($refs = [${i.cbafigj}, ${i.cecadjf}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/${i.cbafigj}")> <$functions.resolveIRI("http://www.w3.org/2000/01/rdf-schema${esc.h}label")> $functions.resolveLanguage("${i.cecadjf}","a-english") .
+#end#end#foreach($i in $dataframe_zjdafbiaei)#set($refs = [${i.cbafigj}, ${i.cecadjf}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/${i.cbafigj}")> <$functions.resolveIRI("http://www.w3.org/2000/01/rdf-schema${esc.h}label")> $functions.resolveLanguage("${i.cecadjf}","a-spanish") .
+#end#end

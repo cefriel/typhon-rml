@@ -1,0 +1,15 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_zheiicejaa = $readers.dahfjhj)   #set($dataframe_zheiicejaa = $reader_zheiicejaa.getDataframe('{
+    "iterator": "$.students[*]",
+    "paths": {
+"cddb": "ID",
+"cecadjf": "Name",
+"iaajjbfg": "Sport" }}'))#set($reader_zheiicejai = $readers.dgieaabjf)  #set($dataframe_zheiicejai = $reader_zheiicejai.getDataframe('{
+    "iterator": "$.sports[*]",
+    "paths": {
+"cddb": "ID",
+"cecadjf": "Name" }}'))#if(!$dataframe_join_bjddhhbehb)#set($dataframe_join_bjddhhbehb = $functions.getListMap($dataframe_zheiicejai, "cddb"))#end#foreach($i in $dataframe_zheiicejaa)<$functions.resolveIRI("http://example.com/resource/student_${i.cddb}")> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ontology/Student> <http://example.com/graph/students>.
+#set($refs = [${i.cecadjf}, ${i.cddb}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/resource/student_${i.cddb}")> <http://xmlns.com/foaf/0.1/name> "${i.cecadjf}" <http://example.com/graph/students> .
+#end#if($functions.checkString($i.iaajjbfg))#foreach($j in $dataframe_join_bjddhhbehb.get($i.iaajjbfg))#set($refs = [${i.cddb}, ${j.cddb}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/resource/student_${i.cddb}")> <http://example.com/ontology/practises> <$functions.resolveIRI("http://example.com/resource/sport_${j.cddb}")> <http://example.com/graph/students> .
+#end#end#end#end#foreach($i in $dataframe_zheiicejai)<$functions.resolveIRI("http://example.com/resource/sport_${i.cddb}")> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ontology/Sport> <http://example.com/graph/sports>.
+#set($refs = [${i.cecadjf}, ${i.cddb}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/resource/sport_${i.cddb}")> <$functions.resolveIRI("http://www.w3.org/2000/01/rdf-schema${esc.h}label")> "${i.cecadjf}" <http://example.com/graph/sports> .
+#end#end

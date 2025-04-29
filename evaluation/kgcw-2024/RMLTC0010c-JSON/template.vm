@@ -1,0 +1,7 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_zfffjaibcg = $readers.zbecahacjfd)   #set($dataframe_zfffjaibcg = $reader_zfffjaibcg.getDataframe('{
+    "iterator": "$.countries[*]",
+    "paths": {
+"zcibffbccj": "[\"Country Code\"]",
+"cecadjf": "Name",
+"zjagjejdhb": "[\"ISO 3166\"]" }}'))#foreach($i in $dataframe_zfffjaibcg)#set($refs = [${i.cecadjf}, ${i.zjagjejdhb}, ${i.zcibffbccj}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/${i.zcibffbccj}/${i.cecadjf}")> <http://example.com/code> "{{{ ${i.zjagjejdhb} }}}" .
+#end#end

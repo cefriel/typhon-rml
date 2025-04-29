@@ -1,0 +1,10 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_bfcehddhgb = $readers.bijfgecbhh)   #set($dataframe_bfcehddhgb = $reader_bfcehddhgb.getDataframe('{
+    "iterator": "$.persons[*]",
+    "paths": {
+"jhfhciej": "fname",
+"badbbdjhf": "lname",
+"zbebdifdajg": "amount" }}'))#foreach($i in $dataframe_bfcehddhgb)#set($refs = [${i.jhfhciej}, ${i.badbbdjhf}, ${i.zbebdifdajg}])#if($functions.checkStrings($refs))_:$functions.encodeURIComponent("${i.jhfhciej}_${i.badbbdjhf}_${i.zbebdifdajg}") <http://example.com/amount> "${i.zbebdifdajg}" .
+#end#set($refs = [${i.jhfhciej}, ${i.badbbdjhf}, ${i.zbebdifdajg}])#if($functions.checkStrings($refs))_:$functions.encodeURIComponent("${i.jhfhciej}_${i.badbbdjhf}_${i.zbebdifdajg}") <http://example.com/amount> "${i.zbebdifdajg}" .
+#end#set($refs = [${i.jhfhciej}, ${i.badbbdjhf}, ${i.zbebdifdajg}])#if($functions.checkStrings($refs))_:$functions.encodeURIComponent("${i.jhfhciej}_${i.badbbdjhf}_${i.zbebdifdajg}") <http://xmlns.com/foaf/0.1/name> "${i.jhfhciej} ${i.badbbdjhf}" .
+#end#set($refs = [${i.jhfhciej}, ${i.badbbdjhf}, ${i.zbebdifdajg}])#if($functions.checkStrings($refs))_:$functions.encodeURIComponent("${i.jhfhciej}_${i.badbbdjhf}_${i.zbebdifdajg}") <http://xmlns.com/foaf/0.1/name> "${i.jhfhciej} ${i.badbbdjhf}" .
+#end#end

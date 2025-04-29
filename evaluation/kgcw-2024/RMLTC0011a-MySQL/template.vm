@@ -1,0 +1,29 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_efjibeeif = $readers.zbbifeicddg)#set($foo = $reader_efjibeeif.setHashVariable(true))#set($foo = $reader_efjibeeif.setOnlyDistinct(true))#set($columns = "ID,FirstName,LastName,Sport_ID,Description")#set($dataframe_efjibeeif = $reader_efjibeeif.getFilteredDataFrame("
+       SELECT Student.ID as ID,
+              Student.FirstName as FirstName,
+              Student.LastName as LastName,
+              Sport.Description as Description,
+              Sport.ID as Sport_ID
+       FROM Student,Sport,Student_Sport
+       WHERE Student.ID = Student_Sport.ID_Student
+       AND Sport.ID = Student_Sport.ID_Sport;
+       ", $columns))#set($types_efjibeeif = $reader_efjibeeif.getColumnTypes("
+       SELECT Student.ID as ID,
+              Student.FirstName as FirstName,
+              Student.LastName as LastName,
+              Sport.Description as Description,
+              Sport.ID as Sport_ID
+       FROM Student,Sport,Student_Sport
+       WHERE Student.ID = Student_Sport.ID_Student
+       AND Sport.ID = Student_Sport.ID_Sport;
+       "))#set($columns = $types_efjibeeif.keySet())#set($refColumns = ["ID","FirstName","LastName","Sport_ID","Description"])#foreach($column in $refColumns)#if(!$columns.contains($column))$error: "$column not found in $dataframe_efjibeeif."#end#end#set($reader_efjibeehb = $readers.zbbifeicddg)#set($foo = $reader_efjibeehb.setHashVariable(true))#set($foo = $reader_efjibeehb.setOnlyDistinct(true))#set($columns = "ID,Description")#set($dataframe_efjibeehb = $reader_efjibeehb.getFilteredDataFrame("
+       SELECT * FROM Sport;
+       ", $columns))#set($types_efjibeehb = $reader_efjibeehb.getColumnTypes("
+       SELECT * FROM Sport;
+       "))#set($columns = $types_efjibeehb.keySet())#set($refColumns = ["ID","Description"])#foreach($column in $refColumns)#if(!$columns.contains($column))$error: "$column not found in $dataframe_efjibeehb."#end#end#foreach($i in $dataframe_efjibeeif)#set($refs = [${i.zbdjejffghj}, ${i.cddb}, ${i.cbdgiadged}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/${i.cddb}/${i.cbdgiadged};${i.zbdjejffghj}")> <http://example.com/id> $functions.resolveSQLDatatype("${i.cddb}", $types_efjibeeif.get("ID")) .
+#end#set($refs = [${i.zbdjejffghj}, ${i.cddb}, ${i.cbdgiadged}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/${i.cddb}/${i.cbdgiadged};${i.zbdjejffghj}")> <http://example.com/firstName> $functions.resolveSQLDatatype("${i.cbdgiadged}", $types_efjibeeif.get("FirstName")) .
+#end#set($refs = [${i.zbdjejffghj}, ${i.cddb}, ${i.cbdgiadged}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/${i.cddb}/${i.cbdgiadged};${i.zbdjejffghj}")> <http://example.com/lastName> $functions.resolveSQLDatatype("${i.zbdjejffghj}", $types_efjibeeif.get("LastName")) .
+#end#set($refs = [${i.zbdjejffghj}, ${i.zfgghhebc}, ${i.cddb}, ${i.cbdgiadged}, ${i.zbhghhggffe}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/${i.cddb}/${i.cbdgiadged};${i.zbdjejffghj}")> <http://example.com/plays> <$functions.resolveIRI("http://example.com/${i.zbhghhggffe}/${i.zfgghhebc}")> .
+#end#end#foreach($i in $dataframe_efjibeehb)#set($refs = [${i.zfgghhebc}, ${i.cddb}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/${i.cddb}/${i.zfgghhebc}")> <http://example.com/id> $functions.resolveSQLDatatype("${i.cddb}", $types_efjibeehb.get("ID")) .
+#end#set($refs = [${i.zfgghhebc}, ${i.cddb}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/${i.cddb}/${i.zfgghhebc}")> <http://example.com/description> $functions.resolveSQLDatatype("${i.zfgghhebc}", $types_efjibeehb.get("Description")) .
+#end#end

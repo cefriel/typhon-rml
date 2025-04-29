@@ -1,0 +1,7 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_bjfighcgdc = $readers.zbefhheagcj)#set($foo = $reader_bjfighcgdc.setOnlyDistinct(true))   #set($dataframe_bjfighcgdc = $reader_bjfighcgdc.getDataframe('for $i in /persons/person
+    return map {
+"jhfhciej": $i/fname/text(),
+"badbbdjhf": $i/lname/text(),
+"zbebdifdajg": $i/amount/text() }'))#foreach($i in $dataframe_bjfighcgdc)<$functions.resolveIRI("http://example.com/${i.jhfhciej};${i.badbbdjhf}")> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> .
+#set($refs = [${i.jhfhciej}, ${i.badbbdjhf}, ${i.zbebdifdajg}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/${i.jhfhciej};${i.badbbdjhf}")> <http://example.com/owes> "${i.zbebdifdajg}" .
+#end#end

@@ -1,0 +1,19 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_zhebgebdi = $readers.gjejfbebj)#set($foo = $reader_zhebgebdi.setHashVariable(true))#set($foo = $reader_zhebgebdi.setOnlyDistinct(true))#set($columns = "Code,Name")#set($dataframe_zhebgebdi = $reader_zhebgebdi.getFilteredDataFrame("
+        SELECT Code, Name, Lan
+        FROM Country
+        WHERE Lan = 'EN';
+       ", $columns))#set($types_zhebgebdi = $reader_zhebgebdi.getColumnTypes("
+        SELECT Code, Name, Lan
+        FROM Country
+        WHERE Lan = 'EN';
+       "))#set($columns = $types_zhebgebdi.keySet())#set($refColumns = ["Code","Name"])#foreach($column in $refColumns)#if(!$columns.contains($column))$error: "$column not found in $dataframe_zhebgebdi."#end#end#set($reader_zhebgeajf = $readers.gjejfbebj)#set($foo = $reader_zhebgeajf.setHashVariable(true))#set($foo = $reader_zhebgeajf.setOnlyDistinct(true))#set($columns = "Code,Name")#set($dataframe_zhebgeajf = $reader_zhebgeajf.getFilteredDataFrame("
+        SELECT Code, Name, Lan
+        FROM Country
+        WHERE Lan = 'EN';
+       ", $columns))#set($types_zhebgeajf = $reader_zhebgeajf.getColumnTypes("
+        SELECT Code, Name, Lan
+        FROM Country
+        WHERE Lan = 'EN';
+       "))#set($columns = $types_zhebgeajf.keySet())#set($refColumns = ["Code","Name"])#foreach($column in $refColumns)#if(!$columns.contains($column))$error: "$column not found in $dataframe_zhebgeajf."#end#end#foreach($i in $dataframe_zhebgebdi)#set($refs = [${i.cbafigj}, ${i.cecadjf}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/${i.cbafigj}")> <$functions.resolveIRI("http://www.w3.org/2000/01/rdf-schema${esc.h}label")> $functions.resolveLanguage($functions.resolveSQLDatatype("${i.cecadjf}", $types_zhebgebdi.get("Name")),"a-spanish") .
+#end#end#foreach($i in $dataframe_zhebgeajf)#set($refs = [${i.cbafigj}, ${i.cecadjf}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/${i.cbafigj}")> <$functions.resolveIRI("http://www.w3.org/2000/01/rdf-schema${esc.h}label")> $functions.resolveLanguage($functions.resolveSQLDatatype("${i.cecadjf}", $types_zhebgeajf.get("Name")),"a-english") .
+#end#end

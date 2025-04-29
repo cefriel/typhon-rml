@@ -1,0 +1,2 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_bffgibeccj = $readers.zbcafccjjce)#set($foo = $reader_bffgibeccj.setHashVariable(true))#set($foo = $reader_bffgibeccj.setOnlyDistinct(true))#set($columns = "Country Code,Name")#set($dataframe_bffgibeccj = $reader_bffgibeccj.getDataframe($columns))#foreach($i in $dataframe_bffgibeccj)#set($refs = [${i.cecadjf}, ${i.bfigcfhabf}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/${i.bfigcfhabf}/${i.cecadjf}")> <http://example.com/name> "${i.cecadjf}" .
+#end#end

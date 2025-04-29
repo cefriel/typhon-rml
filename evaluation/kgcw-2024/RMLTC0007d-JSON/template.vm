@@ -1,0 +1,9 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_bghcadhgjj = $readers.dahfjhj)  #set($dataframe_bghcadhgjj = $reader_bghcadhgjj.getDataframe('{
+    "iterator": "$.students[*]",
+    "paths": {
+"cddb": "ID",
+"cbdgiadged": "FirstName" }}'))#foreach($i in $dataframe_bghcadhgjj)#set($refs = [${i.cddb}, ${i.cbdgiadged}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/Student/${i.cddb}/${i.cbdgiadged}")> <http://xmlns.com/foaf/0.1/name> "${i.cbdgiadged}" .
+#end#set($refs = [${i.cddb}, ${i.cbdgiadged}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/Student/${i.cddb}/${i.cbdgiadged}")> <$functions.resolveIRI("http://www.w3.org/1999/02/22-rdf-syntax-ns${esc.h}type")> <http://example.com/Student> .
+#end#set($refs = [${i.cddb}, ${i.cbdgiadged}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/Student/${i.cddb}/${i.cbdgiadged}")> <http://example.com/id> "${i.cddb}" .
+#end#set($refs = [${i.cddb}, ${i.cbdgiadged}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/Student/${i.cddb}/${i.cbdgiadged}")> <$functions.resolveIRI("http://www.w3.org/1999/02/22-rdf-syntax-ns${esc.h}type")> <http://xmlns.com/foaf/0.1/Person> .
+#end#end

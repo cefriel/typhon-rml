@@ -1,0 +1,19 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_befcgbicif = $readers.gjejfbebj)#set($foo = $reader_befcgbicif.setHashVariable(true))#set($foo = $reader_befcgbicif.setOnlyDistinct(true))#set($columns = "code,name")#set($dataframe_befcgbicif = $reader_befcgbicif.getFilteredDataFrame("
+        SELECT Code, Name, Lan
+        FROM Country
+        WHERE Lan = 'ES';
+       ", $columns))#set($types_befcgbicif = $reader_befcgbicif.getColumnTypes("
+        SELECT Code, Name, Lan
+        FROM Country
+        WHERE Lan = 'ES';
+       "))#set($columns = $types_befcgbicif.keySet())#set($refColumns = ["code","name"])#foreach($column in $refColumns)#if(!$columns.contains($column))$error: "$column not found in $dataframe_befcgbicif."#end#end#set($reader_befcgbicgf = $readers.gjejfbebj)#set($foo = $reader_befcgbicgf.setHashVariable(true))#set($foo = $reader_befcgbicgf.setOnlyDistinct(true))#set($columns = "code,name")#set($dataframe_befcgbicgf = $reader_befcgbicgf.getFilteredDataFrame("
+        SELECT Code, Name, Lan
+        FROM Country
+        WHERE Lan = 'EN';
+       ", $columns))#set($types_befcgbicgf = $reader_befcgbicgf.getColumnTypes("
+        SELECT Code, Name, Lan
+        FROM Country
+        WHERE Lan = 'EN';
+       "))#set($columns = $types_befcgbicgf.keySet())#set($refColumns = ["code","name"])#foreach($column in $refColumns)#if(!$columns.contains($column))$error: "$column not found in $dataframe_befcgbicgf."#end#end#foreach($i in $dataframe_befcgbicif)#set($refs = [${i.ddhdhah}, ${i.dafjbib}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/${i.dafjbib}")> <$functions.resolveIRI("http://www.w3.org/2000/01/rdf-schema${esc.h}label")> $functions.resolveLanguage($functions.resolveSQLDatatype("${i.ddhdhah}", $types_befcgbicif.get("name")),"es") .
+#end#end#foreach($i in $dataframe_befcgbicgf)#set($refs = [${i.ddhdhah}, ${i.dafjbib}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/${i.dafjbib}")> <$functions.resolveIRI("http://www.w3.org/2000/01/rdf-schema${esc.h}label")> $functions.resolveLanguage($functions.resolveSQLDatatype("${i.ddhdhah}", $types_befcgbicgf.get("name")),"en") .
+#end#end

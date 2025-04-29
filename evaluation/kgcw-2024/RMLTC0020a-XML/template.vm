@@ -1,0 +1,4 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_bidccafeic = $readers.iicbjbihc)#set($foo = $reader_bidccafeic.setOnlyDistinct(true)) #set($dataframe_bidccafeic = $reader_bidccafeic.getDataframe('for $i in /students/student
+    return map {
+"cecadjf": $i/Name/text() }'))#foreach($i in $dataframe_bidccafeic)#set($refs = [${i.cecadjf}])#if($functions.checkStrings($refs))<http://example.com/base/$functions.encodeURIComponent("${i.cecadjf}")> <$functions.resolveIRI("http://www.w3.org/1999/02/22-rdf-syntax-ns${esc.h}type")> <http://xmlns.com/foaf/0.1/Person> .
+#end#end

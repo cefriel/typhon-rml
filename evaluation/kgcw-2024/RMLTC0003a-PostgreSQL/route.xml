@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans>
+  <bean name="template" type="com.cefriel.util.ChimeraResourceBean">
+    <properties>
+      <property key="url" value="file://./data/template.vm"/>
+      <property key="serializationFormat" value="vtl"/>
+    </properties>
+  </bean>
+  <route id="gjejfbebj">
+    <from uri="timer:trigger_gjejfbebj?repeatCount=1"/>
+    <setVariable name="jdbcDSN">
+      <constant>jdbc:postgresql://PostgreSQL:5432/db</constant>
+    </setVariable>
+    <setVariable name="username">
+      <constant>root</constant>
+    </setVariable>
+    <setVariable name="password">
+      <constant>root</constant>
+    </setVariable>
+    <setVariable name="readerFormat">
+      <constant>sql</constant>
+    </setVariable>
+    <setVariable name="readerName">
+      <constant>gjejfbebj</constant>
+    </setVariable>
+    <to uri="direct:aggregate"/>
+  </route>
+  <route id="readersAggregation">
+    <from uri="direct:aggregate"/>
+    <!-- HARDCODED NAME OF AGGREGATIONS STRATEGY, DO NOT CHANGE -->
+    <aggregate aggregationStrategy="#class:com.cefriel.ReadersAggregation" completionSize="1">
+      <correlationExpression>
+        <constant>true</constant>
+      </correlationExpression>
+      <to uri="mapt://readers?template=#bean:template"/>
+      <to uri="file:./?fileName=output.nq"/>
+      <!-- STOP THE ROUTE AFTER ONE EXECUTION -->
+      <process ref="#class:com.cefriel.ShutDownProcessor"/>
+    </aggregate>
+  </route>
+</beans>

@@ -1,0 +1,8 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_iaagedaee = $readers.bjagdfaeba)   #set($dataframe_iaagedaee = $reader_iaagedaee.getDataframe('{
+    "iterator": "$.persons[*]",
+    "paths": {
+"jhfhciej": "fname",
+"badbbdjhf": "lname",
+"zbebdifdajg": "amount" }}'))#foreach($i in $dataframe_iaagedaee)<$functions.resolveIRI("http://example.com/${i.jhfhciej};${i.badbbdjhf}")> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> .
+#set($refs = [${i.jhfhciej}, ${i.badbbdjhf}, ${i.zbebdifdajg}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/${i.jhfhciej};${i.badbbdjhf}")> <http://example.com/owes> "${i.zbebdifdajg}" .
+#end#end

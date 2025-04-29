@@ -1,0 +1,2 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_cabcbfjgb = $readers.jjgfjdiea)#set($foo = $reader_cabcbfjgb.setHashVariable(true))#set($foo = $reader_cabcbfjgb.setOnlyDistinct(true))#set($columns = "Name")#set($dataframe_cabcbfjgb = $reader_cabcbfjgb.getDataframe($columns))#foreach($i in $dataframe_cabcbfjgb)#set($refs = [${i.cecadjf}, ${Name}])#if($functions.checkStrings($refs))$error: subject can not be of type Literal.http://example.com/${Name} <http://xmlns.com/foaf/0.1/name> "${i.cecadjf}" .
+#end#end

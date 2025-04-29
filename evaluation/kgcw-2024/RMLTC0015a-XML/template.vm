@@ -1,0 +1,9 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_zbidabajcd = $readers.zbecbhdgf)#set($foo = $reader_zbidabajcd.setOnlyDistinct(true))  #set($dataframe_zbidabajcd = $reader_zbidabajcd.getDataframe('for $i in /countries/country
+    return map {
+"cbafigj": $i/Code/text(),
+"cecadjf": $i/Name/text() }'))#set($reader_zbidabaihj = $readers.ijbehaeii)#set($foo = $reader_zbidabaihj.setOnlyDistinct(true))  #set($dataframe_zbidabaihj = $reader_zbidabaihj.getDataframe('for $i in /countries/country
+    return map {
+"cbafigj": $i/Code/text(),
+"cecadjf": $i/Name/text() }'))#foreach($i in $dataframe_zbidabajcd)#set($refs = [${i.cbafigj}, ${i.cecadjf}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/${i.cbafigj}")> <$functions.resolveIRI("http://www.w3.org/2000/01/rdf-schema${esc.h}label")> $functions.resolveLanguage("${i.cecadjf}","en") .
+#end#end#foreach($i in $dataframe_zbidabaihj)#set($refs = [${i.cbafigj}, ${i.cecadjf}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/${i.cbafigj}")> <$functions.resolveIRI("http://www.w3.org/2000/01/rdf-schema${esc.h}label")> $functions.resolveLanguage("${i.cecadjf}","es") .
+#end#end

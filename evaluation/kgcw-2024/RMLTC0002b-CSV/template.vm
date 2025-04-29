@@ -1,0 +1,2 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_zieaggej = $readers.jjgfjdiea)#set($foo = $reader_zieaggej.setHashVariable(true))#set($foo = $reader_zieaggej.setOnlyDistinct(true))#set($columns = "ID,Name")#set($dataframe_zieaggej = $reader_zieaggej.getDataframe($columns))#foreach($i in $dataframe_zieaggej)#set($refs = [${i.cecadjf}, ${i.cddb}])#if($functions.checkStrings($refs))_:$functions.encodeURIComponent("students${i.cddb}") <http://xmlns.com/foaf/0.1/name> "${i.cecadjf}" .
+#end#end

@@ -1,0 +1,2 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_dijcahbed = $readers.jjgfjdiea)#set($foo = $reader_dijcahbed.setHashVariable(true))#set($foo = $reader_dijcahbed.setOnlyDistinct(true))#set($columns = "ID,FirstName")#set($dataframe_dijcahbed = $reader_dijcahbed.getDataframe($columns)) #foreach($i in $dataframe_dijcahbed)#set($refs = [${i.cddb}, ${i.cbdgiadged}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/Student/${i.cddb}/${i.cbdgiadged}")> <http://xmlns.com/foaf/0.1/name> "${i.cbdgiadged}" .
+#end#end

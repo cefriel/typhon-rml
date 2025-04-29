@@ -1,0 +1,13 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_zhgihbgjag = $readers.dahfjhj)   #set($dataframe_zhgihbgjag = $reader_zhgihbgjag.getDataframe('{
+    "iterator": "$.students[*]",
+    "paths": {
+"cddb": "ID",
+"iaajjbfg": "Sport",
+"cecadjf": "Name" }}'))#set($reader_zhgihbgifj = $readers.dgieaabjf)  #set($dataframe_zhgihbgifj = $reader_zhgihbgifj.getDataframe('{
+    "iterator": "$.sports[*]",
+    "paths": {
+"cddb": "ID",
+"cecadjf": "Name" }}'))#if(!$dataframe_join_zcfcecfg)#set($dataframe_join_zcfcecfg = $functions.getListMap($dataframe_zhgihbgifj, "cddb"))#end#foreach($i in $dataframe_zhgihbgjag)#if($functions.checkString($i.iaajjbfg))#foreach($j in $dataframe_join_zcfcecfg.get($i.iaajjbfg))#set($refs = [${i.cddb}, ${j.cddb}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/resource/student_${i.cddb}")> <http://example.com/ontology/practises> <$functions.resolveIRI("http://example.com/resource/sport_${j.cddb}")> .
+#end#end#end#set($refs = [${i.cecadjf}, ${i.cddb}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/resource/student_${i.cddb}")> <http://xmlns.com/foaf/0.1/name> "${i.cecadjf}" .
+#end#end#foreach($i in $dataframe_zhgihbgifj)#set($refs = [${i.cecadjf}, ${i.cddb}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/resource/sport_${i.cddb}")> <$functions.resolveIRI("http://www.w3.org/2000/01/rdf-schema${esc.h}label")> "${i.cecadjf}" .
+#end#end

@@ -1,0 +1,1 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))$error: "No valid TriplesMap found!"

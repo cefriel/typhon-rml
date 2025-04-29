@@ -1,0 +1,9 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_zdcbicfbic = $readers.zefhjjbajg)#set($foo = $reader_zdcbicfbic.setOnlyDistinct(true)) #set($dataframe_zdcbicfbic = $reader_zdcbicfbic.getDataframe('for $i in /students/student
+    return map {
+"iaajjbfg": $i/Sport/text() }'))#set($reader_zdcbicfbhh = $readers.zefhjjbajg)#set($foo = $reader_zdcbicfbhh.setOnlyDistinct(true)) #set($dataframe_zdcbicfbhh = $reader_zdcbicfbhh.getDataframe('for $i in /students/student
+    return map {
+"zcbeejcgef": $i/Student/text() }'))#foreach($i in $dataframe_zdcbicfbic)<$functions.resolveIRI("http://example.com/${i.iaajjbfg}")> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/Sport> .
+#set($refs = [${i.iaajjbfg}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/${i.iaajjbfg}")> <http://xmlns.com/foaf/0.1/name> "${i.iaajjbfg}" .
+#end#end#foreach($i in $dataframe_zdcbicfbhh)<$functions.resolveIRI("http://example.com/${i.zcbeejcgef}")> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/Student> .
+#set($refs = [${i.zcbeejcgef}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/${i.zcbeejcgef}")> <http://xmlns.com/foaf/0.1/name> "${i.zcbeejcgef}" .
+#end#end

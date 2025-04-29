@@ -1,0 +1,10 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_caffaef = $readers.zbbifeicddg)#set($foo = $reader_caffaef.setHashVariable(true))#set($foo = $reader_caffaef.setOnlyDistinct(true))#set($columns = "Name")#set($dataframe_caffaef = $reader_caffaef.getFilteredDataFrame("
+        SELECT Name, COUNT(Sport)
+        FROM Student
+        GROUP BY Name
+        ", $columns))#set($types_caffaef = $reader_caffaef.getColumnTypes("
+        SELECT Name, COUNT(Sport)
+        FROM Student
+        GROUP BY Name
+        "))#set($columns = $types_caffaef.keySet())#set($refColumns = ["Name"])#foreach($column in $refColumns)#if(!$columns.contains($column))$error: "$column not found in $dataframe_caffaef."#end#end#foreach($i in $dataframe_caffaef)#set($refs = [${i.cecadjf}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/resource/student_${i.cecadjf}")> <http://xmlns.com/foaf/0.1/name> $functions.resolveSQLDatatype("${i.cecadjf}", $types_caffaef.get("Name")) .
+#end#end

@@ -1,0 +1,9 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_ihibididf = $readers.bjbahdhfjd)#set($foo = $reader_ihibididf.setOnlyDistinct(true))   #set($dataframe_ihibididf = $reader_ihibididf.getDataframe('for $i in /Persons/Person
+    return map {
+"zbebdifdajg": $i/amount/text(),
+"jhfhciej": $i/fname/text(),
+"badbbdjhf": $i/lname/text() }'))#foreach($i in $dataframe_ihibididf)#set($refs = [${i.jhfhciej}, ${i.badbbdjhf}, ${i.zbebdifdajg}])#if($functions.checkStrings($refs))_:$functions.encodeURIComponent("${i.zbebdifdajg}_${i.jhfhciej}_${i.badbbdjhf}") <http://xmlns.com/foaf/0.1/name> "${i.jhfhciej} ${i.badbbdjhf}" .
+#end#set($refs = [${i.jhfhciej}, ${i.badbbdjhf}, ${i.zbebdifdajg}])#if($functions.checkStrings($refs))_:$functions.encodeURIComponent("${i.zbebdifdajg}_${i.jhfhciej}_${i.badbbdjhf}") <http://example.com/amount> "${i.zbebdifdajg}" .
+#end#set($refs = [${i.jhfhciej}, ${i.badbbdjhf}, ${i.zbebdifdajg}])#if($functions.checkStrings($refs))_:$functions.encodeURIComponent("${i.zbebdifdajg}_${i.jhfhciej}_${i.badbbdjhf}") <http://example.com/amount> "${i.zbebdifdajg}" .
+#end#set($refs = [${i.jhfhciej}, ${i.badbbdjhf}, ${i.zbebdifdajg}])#if($functions.checkStrings($refs))_:$functions.encodeURIComponent("${i.zbebdifdajg}_${i.jhfhciej}_${i.badbbdjhf}") <http://xmlns.com/foaf/0.1/name> "${i.jhfhciej} ${i.badbbdjhf}" .
+#end#end

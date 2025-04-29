@@ -1,0 +1,19 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_bbdebdjeia = $readers.dahfjhj)   #set($dataframe_bbdebdjeia = $reader_bbdebdjeia.getDataframe('{
+    "iterator": "$.students[*]",
+    "paths": {
+"cddb": "ID",
+"cbdgiadged": "FirstName",
+"zbdjejffghj": "LastName" }}'))#set($reader_bbdebdjehf = $readers.biaabfjhej)  #set($dataframe_bbdebdjehf = $reader_bbdebdjehf.getDataframe('{
+    "iterator": "$.links[*]",
+    "paths": {
+"zbjgeghbceb": "ID_Student",
+"bdjghbccea": "ID_Sport" }}'))#set($reader_bbdebdjfcg = $readers.dgieaabjf)  #set($dataframe_bbdebdjfcg = $reader_bbdebdjfcg.getDataframe('{
+    "iterator": "$.sports[*]",
+    "paths": {
+"cddb": "ID",
+"zfgghhebc": "Description" }}'))#foreach($i in $dataframe_bbdebdjeia)#set($refs = [${i.cddb}, ${i.cbdgiadged}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/student/${i.cddb}")> <http://example.com/firstName> "${i.cbdgiadged}" .
+#end#set($refs = [${i.zbdjejffghj}, ${i.cddb}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/student/${i.cddb}")> <http://example.com/lastName> "${i.zbdjejffghj}" .
+#end#end#foreach($i in $dataframe_bbdebdjehf)#set($refs = [${i.zbjgeghbceb}, ${i.bdjghbccea}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/student/${i.zbjgeghbceb}")> <http://example.com/plays> <$functions.resolveIRI("http://example.com/sport/${i.bdjghbccea}")> .
+#end#end#foreach($i in $dataframe_bbdebdjfcg)#set($refs = [${i.zfgghhebc}, ${i.cddb}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/sport/${i.cddb}")> <http://example.com/description> "${i.zfgghhebc}" .
+#end#set($refs = [${i.cddb}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/sport/${i.cddb}")> <http://example.com/id> "${i.cddb}" .
+#end#end
