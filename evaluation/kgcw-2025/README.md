@@ -19,3 +19,7 @@ The `route.xml` and `template.vm` files generated from the `mapping.ttl` files a
 
 16 out of the 73 tests for the `rml-io` challenge pass successfully.
 The `route.xml` and `template.vm` files generated from the `mapping.ttl` files are available in [../kgcw-2025/rml-io/](../kgcw-2025/rml-io/).
+
+## RML-LV Results
+
+9 out of the 32 tests for the `rml-lv` challenge pass successfully. Experimental RML to MTL test case conversion using the [feat-lv](https://github.com/cefriel/mapping-template/tree/feat-lv) branch of the mapping-template, still not integrated in Typhon-RML. The `mapping.rml.vm` file generated from the `mapping.ttl` is available in [../kgcw-2025/rml-lv/](../kgcw-2025/rml-lv/).
