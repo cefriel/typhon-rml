@@ -1,0 +1,133 @@
+
+
+
+
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+
+
+
+
+    
+    
+
+
+
+
+
+
+
+    
+
+    
+
+        #set($reader_zbdegciedei = $functions.getJSONReaderFromFile("./people.json"))
+        
+            
+
+
+            #set($dataframe_zbdegciedei = $reader_zbdegciedei.getDataframe('{
+                "iterator": "$.people[*]",
+                "paths": {
+            "bahgfafbaj": "name",
+                "bbffdehjci": "items[*]" }}'))
+
+
+
+    
+    #set($dataframe_zbfdchcjeg = $dataframe_zbdegciedei)
+
+                
+                #set($dataframe_zbfdchcjeg = $functions.renameColumn($dataframe_zbfdchcjeg, "bahgfafbaj", "ddhdhah"))
+                #set($dataframe_zbfdchcjeg = $functions.renameColumn($dataframe_zbfdchcjeg, "bbffdehjci", "dcechhb"))
+
+            
+            
+
+            
+            #set($dataframe_zbfdchcjeg = $functions.createView($dataframe_zbfdchcjeg, "item", '{
+                "iterator": "$.[*]",
+                "paths": {
+            "type": "type" }}',  "http://w3id.org/rml/JSONPath"))
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+        
+        
+        
+            
+
+
+        
+        #foreach($i in $dataframe_zbfdchcjeg)
+
+
+        
+
+            
+            
+            
+
+            
+
+            
+
+            
+
+                
+                
+
+
+                    #set($refs = [${i.cbaifhbjfh}, ${i.ddhdhah}])
+
+                    
+                    #if($functions.checkStrings($refs))
+                        
+                        <$functions.resolveIRI("http://example.org/person/${i.ddhdhah}")> <http://example.org/hasItem> <$functions.resolveIRI("http://example.org/person/${i.ddhdhah}/item/${i.cbaifhbjfh}")> .
+                    #end
+
+        #end
+
