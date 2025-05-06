@@ -7,6 +7,7 @@ import com.cefriel.template.io.rdf.RDFReader;
 import com.cefriel.template.io.xml.XMLFormatter;
 import com.cefriel.template.utils.RMLCompilerUtils;
 import com.cefriel.template.utils.TemplateFunctions;
+import com.cefriel.template.utils.Util;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.ValueFactory;
 import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
@@ -95,7 +96,8 @@ public class TyphonRMLMain {
             Model entireGraph = QueryResults.asModel(connection.getStatements(null, null, null));
             Rio.write(entireGraph, writer, RDFFormat.TURTLE);
             String finalTurtle = writer.toString();
-            Files.write(Path.of("./mapping-augmented.ttl"), finalTurtle.getBytes(), StandardOpenOption.CREATE, StandardOpenOption.WRITE);
+            Path mappingsAugmentedPath = Path.of("./mapping-augmented.ttl");
+            Files.write(mappingsAugmentedPath, finalTurtle.getBytes(), StandardOpenOption.CREATE, StandardOpenOption.WRITE);
 
             RDFReader augmentedRMLMappingReader = new RDFReader();
             augmentedRMLMappingReader.addString(finalTurtle, RDFFormat.TURTLE);
@@ -114,6 +116,7 @@ public class TyphonRMLMain {
             rmlMap.put("baseIRI", baseIriRML);
 
             TemplateExecutor templateExecutor = new TemplateExecutor(false, false,true, null);
+            Util.validateRML(mappingsAugmentedPath, false);
             Path outputMapping = templateExecutor.executeMapping(readers, typhonRMLCompiler, Path.of("template.vm"), rmlCompilerUtils, new TemplateMap(rmlMap));
             System.out.println("From " + filePath + " produced " + outputMapping + " MTL mapping.");
         }
