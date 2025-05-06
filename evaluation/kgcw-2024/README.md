@@ -3,7 +3,7 @@
 The benchmark was run using the following Docker image for **Typhon-RML**:
 
 ```bash
-docker pull cefriel/typhon-rml:v0.3
+docker pull cefriel/typhon-rml:kgcw-2024
 ```
 
 The challenge was executed using the official execution tool provided by the [KG-construct challenge](https://github.com/kg-construct/exectool):
