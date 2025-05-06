@@ -1,0 +1,131 @@
+
+
+
+
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+
+
+
+
+
+
+    
+    
+
+
+
+
+
+
+
+    
+
+    
+
+        #set($reader_zbdegciedei = $functions.getJSONReaderFromFile("./people.json"))
+        
+            
+
+
+            #set($dataframe_zbdegciedei = $reader_zbdegciedei.getDataframe('{
+                "iterator": "$.people[*]",
+                "paths": {
+            "bahgfafbaj": "name",
+                "ddhdhah": "name",
+                "zbefjfjjiah": "lastName" }}'))
+
+
+
+    
+    #set($dataframe_zbfdchcjeg = $dataframe_zbdegciedei)
+
+                
+                #set($dataframe_zbfdchcjeg = $functions.renameColumn($dataframe_zbfdchcjeg, "bahgfafbaj", "ddhdhah"))
+                #foreach($i in $dataframe_zbfdchcjeg)
+                    #set($foo = $i.put("bddaifccic", "${i.ddhdhah} ${i.zbefjfjjiah}"))
+                #end
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+        
+        
+        
+            
+
+
+        
+        #foreach($i in $dataframe_zbfdchcjeg)
+
+
+        
+
+            
+            
+            
+
+            
+
+            
+
+            
+
+                
+                
+                        
+
+
+
+
+                    #set($refs = [${i.bddaifccic}, ${i.ddhdhah}])
+
+                    
+                    #if($functions.checkStrings($refs))
+                        
+                        <$functions.resolveIRI("http://example.org/person/${i.ddhdhah}")> <http://example.org/hasFullName> "${i.bddaifccic}" .
+                    #end
+
+        #end
+

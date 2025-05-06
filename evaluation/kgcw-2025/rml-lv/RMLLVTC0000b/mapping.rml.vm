@@ -1,0 +1,123 @@
+
+
+
+
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+    
+
+    
+
+        #set($reader_ehiibecai = $functions.getCSVReaderFromFile("./people.csv"))
+        #set($foo = $reader_ehiibecai.setHashVariable(true))
+        #set($foo = $reader_ehiibecai.setOnlyDistinct(true))
+
+            #set($columns = "name")
+            #set($dataframe_ehiibecai = $reader_ehiibecai.getDataframe($columns))
+    
+
+
+
+    
+    #set($dataframe_zdjchbecje = $dataframe_ehiibecai)
+
+                
+                #set($dataframe_zdjchbecje = $functions.renameColumn($dataframe_zdjchbecje, "ddhdhah", "ddhdhah"))
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+        
+        
+        
+            
+
+
+        
+        #foreach($i in $dataframe_zdjchbecje)
+
+
+        
+
+            
+            
+            
+
+            
+
+            
+
+            
+
+                
+                
+                        
+
+
+
+
+                    #set($refs = [${i.ddhdhah}])
+
+                    
+                    #if($functions.checkStrings($refs))
+                        
+                        <$functions.resolveIRI("http://example.org/person/${i.ddhdhah}")> <http://example.org/hasName> "${i.ddhdhah}" .
+                    #end
+
+        #end
+
