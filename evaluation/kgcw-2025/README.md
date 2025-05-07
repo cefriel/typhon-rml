@@ -2,7 +2,7 @@
 
 The benchmark was run using the version v0.2 of [Typhon-RML](https://github.com/cefriel/typhon-rml/releases/tag/v0.2).
 
-The output produced by **typhon-rml** is compared to the expected output using [`rdflib`](https://rdflib.readthedocs.io/en/stable/):
+Using the [run_tests.py](./run_tests.py) script the output produced by **typhon-rml** is compared to the expected output using [`rdflib`](https://rdflib.readthedocs.io/en/stable/):
 
 ``` python
 [...]
