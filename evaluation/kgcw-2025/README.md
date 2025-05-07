@@ -12,7 +12,7 @@ to_isomorphic(graph_expected) == to_isomorphic(graph_produced)
 
 ## RML-Core Results
 
-48 out of 59 tests for the `rml-core` challenge pass successfully.
+54 out of 59 tests for the `rml-core` challenge pass successfully.
 The `route.xml` and `template.vm` files generated from the `mapping.ttl` files are available in [../kgcw-2025/rml-core/](../kgcw-2025/rml-core/).
 
 ## RML-IO Results
