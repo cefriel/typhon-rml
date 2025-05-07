@@ -6,7 +6,7 @@ The benchmark was run using the following Docker image for **Typhon-RML**:
 docker pull cefriel/typhon-rml:kgcw-2024
 ```
 
-The challenge was executed using the official execution tool provided by the [KG-construct challenge](https://github.com/kg-construct/exectool):
+The challenge was executed using the official execution tool provided by the [KG-construct challenge](https://github.com/kg-construct/exectool) using via the following python class [typhon.py](./typhon.py).
 
 ## Rml-Core Results
 
@@ -16,9 +16,9 @@ The `route.xml` and `template.vm` files generated from the `mapping.ttl` files a
 
 ### Failing Tests
 
-| No. | Test Case             | Reason                                                                                       |
-|-----|-----------------------|----------------------------------------------------------------------------------------------|
-| 1   | RMLTC0002e-CSV        | Test expects error due to input file not existing. Typhon-RML waits indefinitely for the file at the given path. |
-| 2   | RMLTC0002e-JSON       | Same as above.                                                                               |
-| 3   | RMLTC0002e-XML        | Same as above.                                                                               |
-| 4   | RMLTC0002g-JSON        | Same as above.                                                                               |
+| No. | Test Case       | Reason                                                                                                           |
+|-----|-----------------|------------------------------------------------------------------------------------------------------------------|
+| 1   | RMLTC0002e-CSV  | Test expects error due to input file not existing. Typhon-RML waits indefinitely for the file at the given path. |
+| 2   | RMLTC0002e-JSON | Same as above.                                                                                                   |
+| 3   | RMLTC0002e-XML  | Same as above.                                                                                                   |
+| 4   | RMLTC0002g-JSON | Same as above.                                                                                                   |
