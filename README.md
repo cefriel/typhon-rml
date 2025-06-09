@@ -6,6 +6,8 @@
 
 The **Typhon-RML** approach decomposes RML-based knowledge graph construction into **compile-time** and **runtime** phases.
 
+<p align="left"><img src="typhon-rml.png" alt="Diagram" width="800"></p>
+
 At **compile-time**, the input RML mappings are transformed into:
   - A Chimera data pipeline (`route.xml`) built using Apache Camel DSL.
   - A set of template-based mapping rules (`template.vm`) defined using [MTL](https://github.com/cefriel/mapping-template).
