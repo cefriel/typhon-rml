@@ -116,7 +116,7 @@ public class TyphonRMLMain {
             rmlMap.put("baseIRI", baseIriRML);
 
             TemplateExecutor templateExecutor = new TemplateExecutor(false, false,true, null);
-            Util.validateRML(mappingsAugmentedPath, false);
+            Util.validateRML(Files.newInputStream(mappingsAugmentedPath), false);
             Path outputMapping = templateExecutor.executeMapping(readers, typhonRMLCompiler, Path.of("template.vm"), rmlCompilerUtils, new TemplateMap(rmlMap));
             System.out.println("From " + filePath + " produced " + outputMapping + " MTL mapping.");
         }

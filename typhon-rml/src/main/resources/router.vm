@@ -163,7 +163,7 @@ WHERE {
   <from uri="direct:aggregate" />
   <!-- HARDCODED NAME OF AGGREGATIONS STRATEGY, DO NOT CHANGE -->
   <aggregate
-  aggregationStrategy="#class:com.cefriel.ReadersAggregation"
+  aggregationStrategy="#class:com.cefriel.aggregationStrategy.ReadersAggregation"
   completionSize="$var.size()">
     <correlationExpression>
     <constant>true</constant>
