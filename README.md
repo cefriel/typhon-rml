@@ -40,7 +40,7 @@ This will generate the following files:
 You can use JBang or a properly initialized Camel project (including Chimera as a dependency) to execute the generated pipeline. The `route.xml` path should be given as argument and `template.vm` file should be placed in a `data` directory (alternatively, the location of the template file should be modified in the `route.xml`). The latest version of `camel-chimera-mapping-template:x.y.z` can be found on [Maven Central](https://central.sonatype.com/artifact/com.cefriel/camel-chimera-mapping-template).
 
 ```bash
-jbang camel@apache/camel run --dep=mvn:com.cefriel:camel-chimera-mapping-template:x.y.z route.xml'
+jbang camel@apache/camel run --dep=mvn:com.cefriel:camel-chimera-mapping-template:x.y.z route.xml
 ```
 
 Customizations can be introduced for:
