@@ -1,0 +1,7 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_badifahghb = $readers.dahfjhj)   #set($dataframe_badifahghb = $reader_badifahghb.getDataframe('{
+    "iterator": "$.students[*]",
+    "paths": {
+"zbabcfgfhfa": "Sport",
+"bbbjabd": "ID",
+"bahfffbhjh": "Name" }}'))#if(!$dataframe_join_hcgdcdifj)#set($dataframe_join_hcgdcdifj = $functions.getListMap($dataframe_badifahghb, "zbabcfgfhfa"))#end#foreach($i in $dataframe_badifahghb)#if($functions.checkString($i.zbabcfgfhfa))#foreach($j in $dataframe_join_hcgdcdifj.get($i.zbabcfgfhfa))#set($refs = [${j.bahfffbhjh}, ${j.bbbjabd}, ${i.bahfffbhjh}, ${i.bbbjabd}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/Student/${i.bbbjabd}/${i.bahfffbhjh}")> <http://example.com/sameSportAs> <$functions.resolveIRI("http://example.com/Student/${j.bbbjabd}/${j.bahfffbhjh}")> .
+#end#end#end#end

@@ -1,0 +1,7 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_zegdeebiha = $readers.zjehajibae)   #set($dataframe_zegdeebiha = $reader_zegdeebiha.getDataframe('{
+    "iterator": "$[*]",
+    "paths": {
+"bbbjabd": "ID",
+"zjijjdheje": "label",
+"zbgdggghjde": "language" }}'))#foreach($i in $dataframe_zegdeebiha)#set($refs = [${i.zbgdggghjde}, ${i.zjijjdheje}, ${i.bbbjabd}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/${i.bbbjabd}")> <$functions.resolveIRI("http://www.w3.org/2000/01/rdf-schema${esc.h}label")> $functions.resolveLanguage("${i.zjijjdheje}","${i.zbgdggghjde}") .
+#end#end

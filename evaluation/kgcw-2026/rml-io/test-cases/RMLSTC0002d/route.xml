@@ -1,0 +1,25 @@
+
+
+
+
+<beans>
+  <bean name="template" type="com.cefriel.util.ChimeraResourceBean">
+    <properties>
+      <property key="url" value="file://./data/template.vm"/>
+      <property key="serializationFormat" value="vtl"></property>
+    </properties>
+  </bean>
+
+
+
+
+
+
+  <route id="zeffdbdjbi">
+
+
+
+              <from uri="file:./?fileName=Friends.json.tar.xz&amp;noop=true"/>
+
+          <unmarshal>
+	<

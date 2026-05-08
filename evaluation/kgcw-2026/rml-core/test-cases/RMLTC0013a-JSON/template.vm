@@ -1,0 +1,7 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_bhfgfggjid = $readers.bijfgecbhh)   #set($dataframe_bhfgfggjid = $reader_bhfgfggjid.getDataframe('{
+    "iterator": "$.persons[*]",
+    "paths": {
+"bbbjabd": "ID",
+"bahfffbhjh": "Name",
+"jfbcgaiei": "DateOfBirth" }}'))#foreach($i in $dataframe_bhfgfggjid)#set($refs = [${i.jfbcgaiei}, ${i.bahfffbhjh}, ${i.bbbjabd}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/Person/${i.bbbjabd}/${i.bahfffbhjh}/${i.jfbcgaiei}")> <http://example.com/BirthDay> "${i.jfbcgaiei}" .
+#end#end

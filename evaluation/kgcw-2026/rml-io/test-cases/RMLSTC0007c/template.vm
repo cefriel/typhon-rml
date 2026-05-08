@@ -1,0 +1,7 @@
+#set($foo = $functions.setBaseIRI("http://example.com/rules/"))#set($reader_zceefcggci = $readers.zcbecijiech)#set($foo = $reader_zceefcggci.setOnlyDistinct(true))   #set($dataframe_zceefcggci = $reader_zceefcggci.getDataframe('for $i in //Friends/Character
+    return map {
+"geifj": $i/@id,
+"zbcffachcac": $i/age/text()/text(),
+"giijjeade": $i/name/text()/text() }'))#foreach($i in $dataframe_zceefcggci)#set($refs = [${i.geifj}, ${i.zbcffachcac}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.org/${i.geifj}")> <http://xmlns.com/foaf/0.1/age> "${i.zbcffachcac}" .
+#end#set($refs = [${i.geifj}, ${i.giijjeade}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.org/${i.geifj}")> <http://xmlns.com/foaf/0.1/name> "${i.giijjeade}" .
+#end#end

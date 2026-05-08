@@ -1,0 +1,11 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_bbhfdhjaad = $readers.bijfgecbhh)  #set($dataframe_bbhfdhjaad = $reader_bbhfdhjaad.getDataframe('{
+    "iterator": "$.persons[*]",
+    "paths": {
+"zjjfajcafh": "fname",
+"zjcghcgibe": "amount" }}'))#set($reader_bbhfdhijji = $readers.bijfgecbhh)  #set($dataframe_bbhfdhijji = $reader_bbhfdhijji.getDataframe('{
+    "iterator": "$.persons[*]",
+    "paths": {
+"zjijffajdb": "lname",
+"zjcghcgibe": "amount" }}'))#foreach($i in $dataframe_bbhfdhjaad)#set($refs = [${i.zjcghcgibe}, ${i.zjjfajcafh}])#if($functions.checkStrings($refs))<$functions.resolveIRI("${i.zjjfajcafh}")> <http://example.com/amount> "${i.zjcghcgibe}" .
+#end#end#foreach($i in $dataframe_bbhfdhijji)#set($refs = [${i.zjcghcgibe}, ${i.zjijffajdb}])#if($functions.checkStrings($refs))<$functions.resolveIRI("${i.zjijffajdb}")> <http://example.com/amount> "${i.zjcghcgibe}" .
+#end#end

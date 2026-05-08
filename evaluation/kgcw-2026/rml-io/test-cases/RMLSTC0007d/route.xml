@@ -1,0 +1,29 @@
+
+
+
+
+<beans>
+  <bean name="template" type="com.cefriel.util.ChimeraResourceBean">
+    <properties>
+      <property key="url" value="file://./data/template.vm"/>
+      <property key="serializationFormat" value="vtl"></property>
+    </properties>
+  </bean>
+
+
+
+
+
+
+  <route id="jh">
+
+
+
+              <from uri="file:./?fileName=Friends.xml&amp;noop=true"/>
+
+    
+    <convertBodyTo type="java.lang.String"/>
+
+    
+    <setVariable name="readerFormat">
+      <constant>

@@ -1,0 +1,5 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_bhjbabjgeg = $readers.zjehajibae) #set($dataframe_bhjbabjgeg = $reader_bhjbabjgeg.getDataframe('{
+    "iterator": "$[*]",
+    "paths": {
+"bbcaadh": "id" }}'))#foreach($i in $dataframe_bhjbabjgeg)#set($refs = [${i.bbcaadh}])#if($functions.checkStrings($refs))<$functions.resolveIRI("https://example.org/instances/${i.bbcaadh}")> <http://example.org/ns/p> "train" .
+#end#end

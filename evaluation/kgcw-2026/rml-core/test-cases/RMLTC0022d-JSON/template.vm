@@ -1,0 +1,5 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_ejaigcaeg = $readers.zjehajibae) #set($dataframe_ejaigcaeg = $reader_ejaigcaeg.getDataframe('{
+    "iterator": "$[*]",
+    "paths": {
+"degigjea": "FOO" }}'))#foreach($i in $dataframe_ejaigcaeg)#set($refs = [${i.degigjea}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/${i.degigjea}")> <http://example.com/x> $functions.resolveDatatype("${i.degigjea}","http://www.w3.org/2001/XMLSchema${esc.h}integer") .
+#end#end

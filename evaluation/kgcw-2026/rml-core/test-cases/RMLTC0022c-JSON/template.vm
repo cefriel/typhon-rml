@@ -1,0 +1,6 @@
+#set($foo = $functions.setBaseIRI("http://example.com/base/"))#set($reader_ieiacchfi = $readers.zjehajibae)  #set($dataframe_ieiacchfi = $reader_ieiacchfi.getDataframe('{
+    "iterator": "$[*]",
+    "paths": {
+"degigjea": "FOO",
+"degicggf": "BAR" }}'))#foreach($i in $dataframe_ieiacchfi)#set($refs = [${i.degicggf}, ${i.degigjea}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.com/${i.degigjea}")> <http://example.com/x> $functions.resolveDatatype("${i.degigjea}","datatype${esc.h}${i.degicggf}") .
+#end#end

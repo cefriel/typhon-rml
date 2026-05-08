@@ -1,0 +1,10 @@
+#set($foo = $functions.setBaseIRI("http://example.com/rules/"))#set($reader_zcaabifigac = $readers.zdjedfjjgb)#set($foo = $reader_zcaabifigac.setHashVariable(true))#set($foo = $reader_zcaabifigac.setOnlyDistinct(true))#set($dataframe_zcaabifigac = $reader_zcaabifigac.getDataframe("
+    PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+    SELECT ?person ?name ?age WHERE {
+        ?person foaf:name ?name .
+        ?person foaf:age ?age .
+    }
+    "))#foreach($i in $dataframe_zcaabifigac)#set($refs = [${i.zjjbhbgfcd}, ${i.ddhdhah}])#if($functions.checkStrings($refs))<$functions.resolveIRI("${i.zjjbhbgfcd}")> <http://xmlns.com/foaf/0.1/name> "${i.ddhdhah}" .
+#end#set($refs = [${i.zjjbhbgfcd}, ${i.jgfbb}])#if($functions.checkStrings($refs))<$functions.resolveIRI("${i.zjjbhbgfcd}")> <http://xmlns.com/foaf/0.1/age> "${i.jgfbb}" .
+#end#end

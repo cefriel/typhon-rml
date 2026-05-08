@@ -1,0 +1,10 @@
+#set($foo = $functions.setBaseIRI("http://example.com/rules/"))#set($reader_cacacfjhbe = $readers.cajfecafee)#set($foo = $reader_cacacfjhbe.setHashVariable(true))#set($foo = $reader_cacacfjhbe.setOnlyDistinct(true))#set($columns = "id,name,age")#set($dataframe_cacacfjhbe = $reader_cacacfjhbe.getDataframe($columns))#set($reader_cacacfjggg = $readers.bgcfgfiejf)   #set($dataframe_cacacfjggg = $reader_cacacfjggg.getDataframe('{
+    "iterator": "$[*]",
+    "paths": {
+"bbcaadh": "id",
+"bahgfafbaj": "name",
+"dehbdgfd": "age" }}'))#foreach($i in $dataframe_cacacfjhbe)#set($refs = [${i.ddff}, ${i.ddhdhah}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.org/${i.ddff}")> <http://xmlns.com/foaf/0.1/name> "${i.ddhdhah}" .
+#end#set($refs = [${i.ddff}, ${i.jgfbb}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.org/${i.ddff}")> <http://xmlns.com/foaf/0.1/age> "${i.jgfbb}" .
+#end#end#foreach($i in $dataframe_cacacfjggg)#set($refs = [${i.bahgfafbaj}, ${i.bbcaadh}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.org/${i.bbcaadh}")> <http://xmlns.com/foaf/0.1/name> "${i.bahgfafbaj}" .
+#end#set($refs = [${i.dehbdgfd}, ${i.bbcaadh}])#if($functions.checkStrings($refs))<$functions.resolveIRI("http://example.org/${i.bbcaadh}")> <http://xmlns.com/foaf/0.1/age> "${i.dehbdgfd}" .
+#end#end
