@@ -13,7 +13,7 @@ At **compile-time**, the input RML mappings are transformed into:
   - A set of template-based mapping rules (`template.vm`) defined using [MTL](https://github.com/cefriel/mapping-template).
 These artifacts are modifiable before execution to support different data integration scenarios or optimizations.
 
-At **runtime**, the generated pipeline and mappings are executed using the `typhon-chimera-skeleton` component, yielding an output equivalent to the RML's declarative intent.
+At **runtime**, the generated pipeline and mappings can be executed using [`JBang`](https://www.jbang.dev/), yielding an output equivalent to the RML's declarative intent.
 
 How it works:
 
@@ -25,7 +25,7 @@ How it works:
    - Modify `route.xml` to use custom data sources via different Apache Camel components.
    - Adjust `template.vm` for performance tuning (e.g., optimized joins).
 4. **Execution**:
-   - Use `typhon-chimera-skeleton` to run the KG construction pipeline and produce the final output.
+   - Use `JBang` to run the KG construction pipeline and produce the final output.
 
 ### Use Typhon-RML
 
@@ -37,10 +37,10 @@ This will generate the following files:
 - `route.xml`
 - `template.vm`
 
-Use the [typhon-chimera-skeleton](https://github.com/cefriel/typhon-chimera-skeleton) to execute the generated pipeline. The typhon-chimera-skeleton expects the `route.xml` and `template.vm` files to be placed in a `data` directory where the following command will be run:
+You can use JBang or a properly initialized Camel project (including Chimera as a dependency) to execute the generated pipeline. The `route.xml` path should be given as argument and `template.vm` file should be placed in a `data` directory (alternatively, the location of the template file should be modified in the `route.xml`). The latest version of `camel-chimera-mapping-template:x.y.z` can be found on [Maven Central](https://central.sonatype.com/artifact/com.cefriel/camel-chimera-mapping-template).
 
 ```bash
-java -jar target/chimera-typhon-skeleton.jar
+jbang camel@apache/camel run --dep=mvn:com.cefriel:camel-chimera-mapping-template:x.y.z route.xml
 ```
 
 Customizations can be introduced for:
@@ -61,9 +61,15 @@ Customizations can be introduced for:
 
 If you need commercial support for this repository, contact us at [chimera-dev@cefriel.com](mailto:chimera-dev@cefriel.com).
 
+### Contributing
+
+Before contributing, please read carefully, complete and sign our [Contributor Licence Agreement](https://github.com/cefriel/contributing/blob/main/contributor-license-agreement.pdf). 
+
+When contributing to this repository, please first discuss the change you wish to make via issue or any other available method with the repository's owners.
+
 ### License
 
-_Copyright (c) 2025 Cefriel._
+_Copyright (c) Cefriel._
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
